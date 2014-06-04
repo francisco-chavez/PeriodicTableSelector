@@ -36,25 +36,29 @@
 					<RowDefinition />
 				</Grid.RowDefinitions>
 
-				<TextBlock Style="{StaticResource ChemicalElement_TextBlockStyle_01}" 
+				<TextBlock x:Name="GlowItem00" 
+						   Style="{StaticResource ChemicalElement_TextBlockStyle_01}" 
 						   Text="{TemplateBinding ChemicalName}" 
 						   Margin="1,2,1,0"
 						   Grid.Row="0" 
 						   Foreground="{TemplateBinding GlowBrush}"
-						   Effect="{StaticResource GlowEffect}"/>
+						   Effect="{StaticResource GlowEffect}"
+						   Visibility="Hidden"/>
 				<TextBlock Style="{StaticResource ChemicalElement_TextBlockStyle_01}" 
 						   Text="{TemplateBinding ChemicalName}" 
 						   Margin="1,2,1,0"
 						   Grid.Row="0"/>
 
-				<TextBlock Style="{StaticResource ChemicalElement_TextBlockStyle_01}" 
+				<TextBlock x:Name="GlowItem01" 
+						   Style="{StaticResource ChemicalElement_TextBlockStyle_01}" 
 						   Text="{Binding Path=AtomicNumber, 
 										  UpdateSourceTrigger=PropertyChanged, 
 										  RelativeSource={RelativeSource TemplatedParent}, 
 										  StringFormat=\{0:F0\}}" 
 						   Grid.Row="1"
 						   Foreground="{TemplateBinding GlowBrush}"
-						   Effect="{StaticResource GlowEffect}"/>
+						   Effect="{StaticResource GlowEffect}"
+						   Visibility="Hidden"/>
 				<TextBlock Style="{StaticResource ChemicalElement_TextBlockStyle_01}" 
 						   Text="{Binding Path=AtomicNumber, 
 										  UpdateSourceTrigger=PropertyChanged, 
@@ -62,23 +66,27 @@
 										  StringFormat=\{0:F0\}}" 
 						   Grid.Row="1"/>
 
-				<TextBlock Style="{StaticResource ChemicalElement_TextBlockStyle_02}" 
+				<TextBlock x:Name="GlowItem02" 
+						   Style="{StaticResource ChemicalElement_TextBlockStyle_02}" 
 						   Text="{TemplateBinding Symbol}" 
 						   Grid.Row="2"
 						   Foreground="{TemplateBinding GlowBrush}"
-						   Effect="{StaticResource GlowEffect}"/>
+						   Effect="{StaticResource GlowEffect}"
+						   Visibility="Hidden"/>
 				<TextBlock Style="{StaticResource ChemicalElement_TextBlockStyle_02}" 
 						   Text="{TemplateBinding Symbol}" 
 						   Grid.Row="2"/>
 
-				<TextBlock Style="{StaticResource ChemicalElement_TextBlockStyle_01}" 
+				<TextBlock x:Name="GlowItem03" 
+						   Style="{StaticResource ChemicalElement_TextBlockStyle_01}" 
 						   Text="{Binding Path=AtomicMass, 
 										  UpdateSourceTrigger=PropertyChanged, 
 										  RelativeSource={RelativeSource TemplatedParent}, 
 										  StringFormat=\{0:N\}}" 
 						   Grid.Row="3"
 						   Foreground="{TemplateBinding GlowBrush}"
-						   Effect="{StaticResource GlowEffect}"/>
+						   Effect="{StaticResource GlowEffect}"
+						   Visibility="Hidden"/>
 				<TextBlock Style="{StaticResource ChemicalElement_TextBlockStyle_01}" 
 						   Text="{Binding Path=AtomicMass, 
 										  UpdateSourceTrigger=PropertyChanged, 
@@ -86,16 +94,28 @@
 										  StringFormat=\{0:N\}}" 
 						   Grid.Row="3"/>
 				
-				<Border Grid.Row="0"
+				<Border x:Name="GlowItem04" 
+						Grid.Row="0"
 						Grid.RowSpan="4"
 						BorderBrush="{TemplateBinding GlowBrush}"
 						BorderThickness="2"
 						Background="{x:Null}"
 						Margin="-2,-3,-2,-2"
 						Effect="{StaticResource GlowEffect}"
-						ClipToBounds="True"/>
+						ClipToBounds="True"
+						Visibility="Hidden"/>
 			</Grid>
 		</Border>
+		
+		<ControlTemplate.Triggers>
+			<Trigger Property="IsChecked" Value="True">
+				<Setter Property="Visibility" Value="Visible" TargetName="GlowItem00"/>
+				<Setter Property="Visibility" Value="Visible" TargetName="GlowItem01"/>
+				<Setter Property="Visibility" Value="Visible" TargetName="GlowItem02"/>
+				<Setter Property="Visibility" Value="Visible" TargetName="GlowItem03"/>
+				<Setter Property="Visibility" Value="Visible" TargetName="GlowItem04"/>
+			</Trigger>
+		</ControlTemplate.Triggers>
 	</ControlTemplate>
 
 	<Style TargetType="local:ChemicalElement">
