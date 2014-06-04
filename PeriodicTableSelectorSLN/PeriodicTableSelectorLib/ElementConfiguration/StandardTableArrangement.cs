@@ -78,46 +78,43 @@ namespace Unv.PeriodicTableSelectorLib.ElementConfiguration
 				displayArea.Children.Add(element);
 		}
 
-		public override Size MeasureElements(Size constraint, FactoryBase chemicalFactory)
-		{
-			Size neededSize = new Size(0, 0);
+		//public override Size MeasureElements(Size constraint, FactoryBase chemicalFactory)
+		//{
+		//	Size neededSize = new Size(0, 0);
 
+		//	foreach (var element in chemicalFactory.Elements)
+		//	{
+		//		element.Measure(constraint);
+		//		var desiredSize = element.DesiredSize;
+
+		//		neededSize.Width = Math.Max(neededSize.Width, desiredSize.Width);
+		//		neededSize.Height = Math.Max(neededSize.Height, desiredSize.Height);
+
+		//		neededSize.Width = Math.Max(neededSize.Width, desiredSize.Width * (m_atomicNumberToGroupMap[element.AtomicNumber] - 1));
+		//		neededSize.Height = Math.Max(neededSize.Height, desiredSize.Height * (m_atomicNumberToPeriodMap[element.AtomicNumber] - 1));
+		//	}
+
+		//	return neededSize;
+		//}
+
+		public override void ArrangeElements(Canvas displayArea, FactoryBase chemicalFactory)
+		{
 			foreach (var element in chemicalFactory.Elements)
 			{
-				element.Measure(constraint);
-				var desiredSize = element.DesiredSize;
+				double width = element.Width;
+				double height = element.Height;
 
-				neededSize.Width = Math.Max(neededSize.Width, desiredSize.Width);
-				neededSize.Height = Math.Max(neededSize.Height, desiredSize.Height);
+				if (double.IsNaN(width))
+					width = element.ActualWidth;
+				if (double.IsNaN(height))
+					height = element.Height;
 
-				neededSize.Width = Math.Max(neededSize.Width, desiredSize.Width * (m_atomicNumberToGroupMap[element.AtomicNumber] - 1));
-				neededSize.Height = Math.Max(neededSize.Height, desiredSize.Height * (m_atomicNumberToPeriodMap[element.AtomicNumber] - 1));
-			}
-
-			return neededSize;
-		}
-
-		public override Size ArrangeElements(Canvas displayArea, Size arrangeBounds, FactoryBase chemicalFactory)
-		{
-			var size = new Size(0, 0);
-
-			foreach (var element in chemicalFactory.Elements)
-			{
-				var elementSize = element.DesiredSize;
-
-				double x = elementSize.Width * (m_atomicNumberToGroupMap[element.AtomicNumber] - 1);
-				double y = elementSize.Height * (m_atomicNumberToPeriodMap[element.AtomicNumber] - 1);
+				double x = width * (m_atomicNumberToGroupMap[element.AtomicNumber] - 1);
+				double y = width * (m_atomicNumberToPeriodMap[element.AtomicNumber] - 1);
 				
 				Canvas.SetLeft(element, x);
 				Canvas.SetTop(element, y);
-
-				size.Width = Math.Max(size.Width, x + elementSize.Width);
-				size.Height = Math.Max(size.Height, y + elementSize.Height);
-
-				element.Arrange(new Rect(elementSize));
 			}
-
-			return size;
 		}
 		#endregion
 	}

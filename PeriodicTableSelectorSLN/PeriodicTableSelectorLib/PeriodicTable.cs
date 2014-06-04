@@ -109,25 +109,29 @@ namespace Unv.PeriodicTableSelectorLib
 
 
 		#region Methods
-		protected override Size MeasureOverride(Size constraint)
-		{
-			if (m_drawArea == null || ChemicalElementFactory == null || ChemicalElementPlacer == null)
-				return base.MeasureOverride(constraint);
+		//protected override Size MeasureOverride(Size constraint)
+		//{
+		//	var defaultSize = base.MeasureOverride(constraint);
 
-			return ChemicalElementPlacer.MeasureElements(constraint, ChemicalElementFactory);
-		}
+		//	if (m_drawArea == null || ChemicalElementFactory == null || ChemicalElementPlacer == null)
+		//		return defaultSize;
 
-		protected override Size ArrangeOverride(Size arrangeBounds)
-		{
-			if (m_drawArea == null || ChemicalElementFactory == null || ChemicalElementPlacer == null)
-				return base.ArrangeOverride(arrangeBounds);
+		//	return ChemicalElementPlacer.MeasureElements(constraint, ChemicalElementFactory);
+		//}
 
-			Size realSize = ChemicalElementPlacer.ArrangeElements(m_drawArea, arrangeBounds, ChemicalElementFactory);
-			m_drawArea.Measure(realSize);
-			m_drawArea.Arrange(new Rect(realSize));
+		//protected override Size ArrangeOverride(Size arrangeBounds)
+		//{
+		//	var defaultSize = base.ArrangeOverride(arrangeBounds);
 
-			return realSize;
-		}
+		//	if (m_drawArea == null || ChemicalElementFactory == null || ChemicalElementPlacer == null)
+		//		return defaultSize;
+
+		//	Size realSize = ChemicalElementPlacer.ArrangeElements(m_drawArea, arrangeBounds, ChemicalElementFactory);
+		//	m_drawArea.Measure(realSize);
+		//	m_drawArea.Arrange(new Rect(realSize));
+
+		//	return defaultSize;
+		//}
 
 		public override void OnApplyTemplate()
 		{
@@ -150,6 +154,7 @@ namespace Unv.PeriodicTableSelectorLib
 
 			m_drawArea.Children.Clear();
 			elementPlacer.InsertElements(m_drawArea, chemicalFactory);
+			elementPlacer.ArrangeElements(m_drawArea, chemicalFactory);
 		}
 
 		private void ClearCanvas()

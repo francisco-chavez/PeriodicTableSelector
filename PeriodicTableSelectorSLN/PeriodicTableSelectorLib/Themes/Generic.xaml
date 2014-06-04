@@ -132,12 +132,17 @@
 	<!-- Periodic Table Selector -->
 	<ControlTemplate x:Key="PeriodicTableTemplate" TargetType="local:PeriodicTable">
 		<Border BorderBrush="Blue" 
-				BorderThickness="20"
+				BorderThickness="2"
 				VerticalAlignment="Stretch"
 				HorizontalAlignment="Stretch"
 				Width="{TemplateBinding Width}"
 				Height="{TemplateBinding Height}">
-			<local:MeasuredCanvas x:Name="PART_CanvasArea"/>
+			<Viewbox HorizontalAlignment="Stretch"
+					 VerticalAlignment="Stretch"
+					 Stretch="Uniform"
+					 StretchDirection="Both">
+				<local:MeasuredCanvas x:Name="PART_CanvasArea"/>
+			</Viewbox>
 		</Border>
 	</ControlTemplate>
 

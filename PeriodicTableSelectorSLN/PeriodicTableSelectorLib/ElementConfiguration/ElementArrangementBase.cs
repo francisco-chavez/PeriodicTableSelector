@@ -13,7 +13,6 @@ namespace Unv.PeriodicTableSelectorLib.ElementConfiguration
 	public abstract class ElementArrangementBase
 	{
 		public abstract void InsertElements(Canvas displayArea, FactoryBase chemicalFactory);
-		public abstract Size MeasureElements(Size constraint, FactoryBase chemicalFactory);
-		public abstract Size ArrangeElements(Canvas displayArea, Size arrangeBounds, FactoryBase chemicalFactory);
+		public abstract void ArrangeElements(Canvas displayArea, FactoryBase chemicalFactory);
 	}
 }
