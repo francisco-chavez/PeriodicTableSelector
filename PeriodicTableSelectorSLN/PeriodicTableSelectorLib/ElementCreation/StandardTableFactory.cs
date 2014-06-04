@@ -52,6 +52,7 @@ namespace Unv.PeriodicTableSelectorLib.ElementCreation
 
 			m_elementNames		= elements.Select(chem => { return chem.ChemicalName; }).ToArray();
 			m_elementSymbols	= elements.Select(chem => { return chem.Symbol; }).ToArray();
+			m_elements			= elements.ToArray();
 
 			foreach (var element in elements)
 			{
@@ -86,6 +87,15 @@ namespace Unv.PeriodicTableSelectorLib.ElementCreation
 
 		private List<ChemicalElement> CreateElements()
 		{
+			// I know this isn't the most flexable way to do this. A database,
+			// ini, json, or xml file would be a much better place to store
+			// information. Using one of those solutions would also make it
+			// easy to fix a typo for someone that doesn't have access to the
+			// source code. Then again, this is the Periodic Table, which
+			// changes how often? And, people do have access to the source
+			// code. I'm not saying that I won't change it to one of the above
+			// solutions, but for now, this works just fine.
+			// -FCT
 			List<ChemicalElement> elements = new List<ChemicalElement>(118);
 
 			///
@@ -97,10 +107,24 @@ namespace Unv.PeriodicTableSelectorLib.ElementCreation
 			CreateNewElement(4, "Be", "Beryllium",   9.012182,	elements);
 			CreateNewElement(5, "B",  "Boron",		10.81,		elements);
 
+			///
+			/// Elements 6 - 10
+			/// 
+			CreateNewElement( 6, "C",  "Carbon",	12.011,		elements);
+			CreateNewElement( 7, "N",  "Nitrogen",	14.007,		elements);
+			CreateNewElement( 8, "O",  "Oxygen",	15.999,		elements);
+			CreateNewElement( 9, "F",  "Fluorine",	18.9984032, elements);
+			CreateNewElement(10, "Ne", "Neon",		20.1797,	elements);
 
 			return elements;
 		}
 
+		///<summary>
+		/// I'm doing this on a laptop, there is only so much screen space 
+		/// to work with. This method makes it a lot easier to read the list 
+		/// of chemical elements as I type the information in.
+		/// -FCT
+		/// </summary>
 		private void CreateNewElement(int atomicNumer, string symbol, string name, double meanAtomicMass, List<ChemicalElement> elements)
 		{
 			var element = 

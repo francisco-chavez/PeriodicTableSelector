@@ -13,9 +13,9 @@ namespace Unv.PeriodicTableSelectorLib.ElementCreation
 		public abstract string[]			ElementSymbols	{ get; }
 
 
-		public abstract bool			HasElement(int atomicNumber);
-		public abstract bool			HasElement(string nameOrSymbol);
-		public abstract ChemicalElement Element(int atomicNumber);
-		public abstract ChemicalElement Element(string nameOrSymbol);
+		public abstract bool				HasElement(int atomicNumber);
+		public abstract bool				HasElement(string nameOrSymbol);
+		public abstract ChemicalElement		Element(int atomicNumber);
+		public abstract ChemicalElement		Element(string nameOrSymbol);
 	}
 }
