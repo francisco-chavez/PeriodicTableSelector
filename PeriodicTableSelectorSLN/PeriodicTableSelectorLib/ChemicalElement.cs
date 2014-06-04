@@ -23,6 +23,7 @@ namespace Unv.PeriodicTableSelectorLib
 		public static readonly DependencyProperty ChemicalNameProperty;
 		public static readonly DependencyProperty AtomicNumberProperty;
 		public static readonly DependencyProperty AtomicMassProperty;
+		public static readonly DependencyProperty SymbolProperty;
 		#endregion
 
 
@@ -44,6 +45,12 @@ namespace Unv.PeriodicTableSelectorLib
 			get { return (double) GetValue(AtomicMassProperty); }
 			set { SetValue(AtomicMassProperty, value); }
 		}
+
+		public string Symbol
+		{
+			get { return (string) GetValue(SymbolProperty); }
+			set { SetValue(SymbolProperty, value); }
+		}
 		#endregion
 
 
@@ -58,7 +65,8 @@ namespace Unv.PeriodicTableSelectorLib
 			ChemicalNameProperty = DependencyProperty.Register(
 				"ChemicalName", 
 				typeof(string), 
-				typeof(ChemicalElement));
+				typeof(ChemicalElement),
+				new PropertyMetadata(null));
 
 			AtomicNumberProperty = DependencyProperty.Register(
 				"AtomicNumber", 
@@ -69,8 +77,14 @@ namespace Unv.PeriodicTableSelectorLib
 			AtomicMassProperty = DependencyProperty.Register(
 				"AtomicMass", 
 				typeof(double), 
-				typeof(double), 
+				typeof(ChemicalElement), 
 				new PropertyMetadata(0));
+
+			SymbolProperty = DependencyProperty.Register(
+				"Symbol",
+				typeof(string),
+				typeof(ChemicalElement),
+				new PropertyMetadata(null));
 		}
 		#endregion
 	}
