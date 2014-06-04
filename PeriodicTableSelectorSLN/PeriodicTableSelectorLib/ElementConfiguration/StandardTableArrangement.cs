@@ -63,6 +63,44 @@ namespace Unv.PeriodicTableSelectorLib.ElementConfiguration
 			aToPMap.Add(10, 2);
 
 
+			///
+			/// Elements 11 - 15
+			/// 
+			aToGMap.Add(11, 1);
+			aToPMap.Add(11, 3);
+
+			aToGMap.Add(12, 2);
+			aToPMap.Add(12, 3);
+
+			aToGMap.Add(13, 13);
+			aToPMap.Add(13, 3);
+
+			aToGMap.Add(14, 14);
+			aToPMap.Add(14, 3);
+
+			aToGMap.Add(15, 15);
+			aToPMap.Add(15, 3);
+
+
+			///
+			/// Elements 16 - 20
+			/// 
+			aToGMap.Add(16, 16);
+			aToPMap.Add(16, 3);
+
+			aToGMap.Add(17, 17);
+			aToPMap.Add(17, 3);
+
+			aToGMap.Add(18, 18);
+			aToPMap.Add(18, 3);
+
+			aToGMap.Add(19, 1);
+			aToPMap.Add(19, 4);
+
+			aToGMap.Add(20, 2);
+			aToPMap.Add(20, 4);
+
+
 			m_atomicNumberToGroupMap = aToGMap;
 			m_atomicNumberToPeriodMap = aToPMap;
 		}

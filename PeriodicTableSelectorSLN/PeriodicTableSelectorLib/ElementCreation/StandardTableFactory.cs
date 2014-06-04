@@ -116,6 +116,24 @@ namespace Unv.PeriodicTableSelectorLib.ElementCreation
 			CreateNewElement( 9, "F",  "Fluorine",	18.9984032, elements);
 			CreateNewElement(10, "Ne", "Neon",		20.1797,	elements);
 
+			///
+			/// Elements 11 - 15
+			/// 
+			CreateNewElement(11, "Na", "Sodium", 22.98976928, elements);
+			CreateNewElement(12, "Mg", "Magnesium", 24.305, elements);
+			CreateNewElement(13, "Al", "Aluminium", 26.9815386, elements);
+			CreateNewElement(14, "Si", "Silicon", 28.085, elements);
+			CreateNewElement(15, "P", "Phosphorus", 30.973762, elements);
+
+			///
+			/// Elements 16 - 20
+			/// 
+			CreateNewElement(16, "S", "Sulfur", 32.06, elements);
+			CreateNewElement(17, "Cl", "Chlorine", 35.45, elements);
+			CreateNewElement(18, "Ar", "Argon", 39.948, elements);
+			CreateNewElement(19, "K", "Potassium", 39.0983, elements);
+			CreateNewElement(20, "Ca", "Calcium", 40.078, elements);
+
 			return elements;
 		}
 
