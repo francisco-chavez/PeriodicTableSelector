@@ -16,40 +16,62 @@ using System.Windows.Shapes;
 
 namespace Unv.PeriodicTableSelectorLib
 {
-	/// <summary>
-	/// Follow steps 1a or 1b and then 2 to use this custom control in a XAML file.
-	///
-	/// Step 1a) Using this custom control in a XAML file that exists in the current project.
-	/// Add this XmlNamespace attribute to the root element of the markup file where it is 
-	/// to be used:
-	///
-	///     xmlns:MyNamespace="clr-namespace:Unv.PeriodicTableSelectorLib"
-	///
-	///
-	/// Step 1b) Using this custom control in a XAML file that exists in a different project.
-	/// Add this XmlNamespace attribute to the root element of the markup file where it is 
-	/// to be used:
-	///
-	///     xmlns:MyNamespace="clr-namespace:Unv.PeriodicTableSelectorLib;assembly=Unv.PeriodicTableSelectorLib"
-	///
-	/// You will also need to add a project reference from the project where the XAML file lives
-	/// to this project and Rebuild to avoid compilation errors:
-	///
-	///     Right click on the target project in the Solution Explorer and
-	///     "Add Reference"->"Projects"->[Browse to and select this project]
-	///
-	///
-	/// Step 2)
-	/// Go ahead and use your control in the XAML file.
-	///
-	///     <MyNamespace:ChemicalElement/>
-	///
-	/// </summary>
-	public class ChemicalElement : Control
+	public class ChemicalElement 
+		: ToggleButton
 	{
+		#region Attributes
+		public static readonly DependencyProperty ChemicalNameProperty;
+		public static readonly DependencyProperty AtomicNumberProperty;
+		public static readonly DependencyProperty AtomicMassProperty;
+		#endregion
+
+
+		#region Properties
+		public string ChemicalName
+		{
+			get { return (string) GetValue(ChemicalNameProperty); }
+			set { SetValue(ChemicalNameProperty, value); }
+		}
+
+		public int AtomicNumber
+		{
+			get { return (int) GetValue(AtomicNumberProperty); }
+			set { SetValue(AtomicNumberProperty, value); }
+		}
+
+		public double AtomicMass
+		{
+			get { return (double) GetValue(AtomicMassProperty); }
+			set { SetValue(AtomicMassProperty, value); }
+		}
+		#endregion
+
+
+		#region Constructors
 		static ChemicalElement()
 		{
-			DefaultStyleKeyProperty.OverrideMetadata(typeof(ChemicalElement), new FrameworkPropertyMetadata(typeof(ChemicalElement)));
+			DefaultStyleKeyProperty.OverrideMetadata(
+				typeof(ChemicalElement), 
+				new FrameworkPropertyMetadata(typeof(ChemicalElement)));
+
+
+			ChemicalNameProperty = DependencyProperty.Register(
+				"ChemicalName", 
+				typeof(string), 
+				typeof(ChemicalElement));
+
+			AtomicNumberProperty = DependencyProperty.Register(
+				"AtomicNumber", 
+				typeof(int), 
+				typeof(ChemicalElement), 
+				new PropertyMetadata(0));
+
+			AtomicMassProperty = DependencyProperty.Register(
+				"AtomicMass", 
+				typeof(double), 
+				typeof(double), 
+				new PropertyMetadata(0));
 		}
+		#endregion
 	}
 }
