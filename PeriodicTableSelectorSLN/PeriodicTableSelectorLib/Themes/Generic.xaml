@@ -122,13 +122,22 @@
 		<Setter Property="Width" Value="80"/>
 		<Setter Property="Height" Value="110"/>
 		<Setter Property="Template" Value="{StaticResource ChemicalElementTemplate}"/>
+		
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="Foreground" Value="Black"/>
+		<Setter Property="GlowBrush"  Value="Gold"/>
 	</Style>
 
 
 	<!-- Periodic Table Selector -->
 	<ControlTemplate x:Key="PeriodicTableTemplate" TargetType="local:PeriodicTable">
-		<Border>
-			<Canvas x:Name="PART_CanvasArea"/>
+		<Border BorderBrush="Blue" 
+				BorderThickness="20"
+				VerticalAlignment="Stretch"
+				HorizontalAlignment="Stretch"
+				Width="{TemplateBinding Width}"
+				Height="{TemplateBinding Height}">
+			<local:MeasuredCanvas x:Name="PART_CanvasArea"/>
 		</Border>
 	</ControlTemplate>
 

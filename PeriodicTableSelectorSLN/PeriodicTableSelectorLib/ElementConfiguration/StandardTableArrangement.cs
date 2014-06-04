@@ -113,6 +113,8 @@ namespace Unv.PeriodicTableSelectorLib.ElementConfiguration
 
 				size.Width = Math.Max(size.Width, x + elementSize.Width);
 				size.Height = Math.Max(size.Height, y + elementSize.Height);
+
+				element.Arrange(new Rect(elementSize));
 			}
 
 			return size;

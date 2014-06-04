@@ -53,6 +53,7 @@
     <Compile Include="ElementConfiguration\StandardTableArrangement.cs" />
     <Compile Include="ElementCreation\FactoryBase.cs" />
     <Compile Include="ElementCreation\StandardTableFactory.cs" />
+    <Compile Include="MeasuredCanvas.cs" />
     <Compile Include="PeriodicTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

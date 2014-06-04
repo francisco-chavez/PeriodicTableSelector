@@ -122,7 +122,11 @@ namespace Unv.PeriodicTableSelectorLib
 			if (m_drawArea == null || ChemicalElementFactory == null || ChemicalElementPlacer == null)
 				return base.ArrangeOverride(arrangeBounds);
 
-			return ChemicalElementPlacer.ArrangeElements(m_drawArea, arrangeBounds, ChemicalElementFactory);
+			Size realSize = ChemicalElementPlacer.ArrangeElements(m_drawArea, arrangeBounds, ChemicalElementFactory);
+			m_drawArea.Measure(realSize);
+			m_drawArea.Arrange(new Rect(realSize));
+
+			return realSize;
 		}
 
 		public override void OnApplyTemplate()
