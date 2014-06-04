@@ -72,13 +72,38 @@ namespace Unv.PeriodicTableSelectorLib
 				"ChemicalElementFactory",
 				typeof(FactoryBase),
 				typeof(PeriodicTable),
-				new PropertyMetadata(null));
+				new FrameworkPropertyMetadata(
+					null, 
+					FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.AffectsMeasure,
+					ChemicalElementFactory_Changed));
 
 			ChemicalElementPlacerProperty = DependencyProperty.Register(
 				"ChemicalElementPlacer",
 				typeof(ElementArrangementBase),
 				typeof(PeriodicTable),
-				new PropertyMetadata(null));
+				new FrameworkPropertyMetadata(
+					null,
+					FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.AffectsMeasure,
+					ChemicalElementPlacer_Changed));
+		}
+		#endregion
+
+
+		#region Dependency Property Event Handlers
+		private static void ChemicalElementFactory_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
+		{
+			PeriodicTable pTable = (PeriodicTable) d;
+
+			pTable.ClearCanvas();
+			pTable.PopulateCanvas((FactoryBase) e.NewValue, pTable.ChemicalElementPlacer);
+		}
+
+		private static void ChemicalElementPlacer_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
+		{
+			PeriodicTable pTable = (PeriodicTable) d;
+
+			pTable.ClearCanvas();
+			pTable.PopulateCanvas(pTable.ChemicalElementFactory, (ElementArrangementBase) e.NewValue);
 		}
 		#endregion
 
@@ -86,18 +111,47 @@ namespace Unv.PeriodicTableSelectorLib
 		#region Methods
 		protected override Size MeasureOverride(Size constraint)
 		{
-			return base.MeasureOverride(constraint);
+			if (m_drawArea == null || ChemicalElementFactory == null || ChemicalElementPlacer == null)
+				return base.MeasureOverride(constraint);
+
+			return ChemicalElementPlacer.MeasureElements(constraint, ChemicalElementFactory);
 		}
 
 		protected override Size ArrangeOverride(Size arrangeBounds)
 		{
-			return base.ArrangeOverride(arrangeBounds);
+			if (m_drawArea == null || ChemicalElementFactory == null || ChemicalElementPlacer == null)
+				return base.ArrangeOverride(arrangeBounds);
+
+			return ChemicalElementPlacer.ArrangeElements(m_drawArea, arrangeBounds, ChemicalElementFactory);
 		}
 
 		public override void OnApplyTemplate()
 		{
-			m_drawArea = GetTemplateChild("PART_CanvasArea") as Canvas;
 			base.OnApplyTemplate();
+
+			m_drawArea = GetTemplateChild("PART_CanvasArea") as Canvas;
+			PopulateCanvas(ChemicalElementFactory, ChemicalElementPlacer);
+		}
+
+		private void PopulateCanvas(FactoryBase chemicalFactory, ElementArrangementBase elementPlacer)
+		{
+			if (chemicalFactory == null)
+				return;
+
+			if (elementPlacer == null)
+				return;
+
+			if (m_drawArea == null)
+				return;
+
+			m_drawArea.Children.Clear();
+			elementPlacer.InsertElements(m_drawArea, chemicalFactory);
+		}
+
+		private void ClearCanvas()
+		{
+			if (m_drawArea != null)
+				m_drawArea.Children.Clear();
 		}
 		#endregion
 	}
