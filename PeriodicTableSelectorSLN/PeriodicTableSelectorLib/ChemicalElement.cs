@@ -16,8 +16,12 @@ using System.Windows.Shapes;
 
 namespace Unv.PeriodicTableSelectorLib
 {
+	/// <summary>
+	/// This class represents an interactive chemical element from the
+	/// periodic table.
+	/// </summary>
 	public class ChemicalElement
-	: ToggleButton
+		: ToggleButton
 	{
 		#region Attributes
 		public static readonly DependencyProperty ChemicalNameProperty;
@@ -30,30 +34,46 @@ namespace Unv.PeriodicTableSelectorLib
 
 
 		#region Properties
+		/// <summary>
+		/// Gets or sets the Brush that is used to generate a glow when
+		/// selected (IsChecked == True).
+		/// </summary>
 		public Brush GlowBrush
 		{
 			get { return (Brush) GetValue(GlowBrushProperty); }
 			set { SetValue(GlowBrushProperty, value); }
 		}
 
+		/// <summary>
+		/// Gets or sets the name of the chemical element.
+		/// </summary>
 		public string ChemicalName
 		{
 			get { return (string) GetValue(ChemicalNameProperty); }
 			set { SetValue(ChemicalNameProperty, value); }
 		}
 
+		/// <summary>
+		/// Gets or sets the atomic number of the chemical element.
+		/// </summary>
 		public int AtomicNumber
 		{
 			get { return (int) GetValue(AtomicNumberProperty); }
 			set { SetValue(AtomicNumberProperty, value); }
 		}
 
+		/// <summary>
+		/// Gets or sets the mean atomic mass of the chemical element.
+		/// </summary>
 		public double AtomicMass
 		{
 			get { return (double) GetValue(AtomicMassProperty); }
 			set { SetValue(AtomicMassProperty, value); }
 		}
 
+		/// <summary>
+		/// Gets or sets the atomic symbol of the chemical element.
+		/// </summary>
 		public string Symbol
 		{
 			get { return (string) GetValue(SymbolProperty); }

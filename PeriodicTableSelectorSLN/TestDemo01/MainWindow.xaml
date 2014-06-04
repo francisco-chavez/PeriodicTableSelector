@@ -4,16 +4,7 @@
 		xmlns:PeriodicTableSelectorLib="clr-namespace:Unv.PeriodicTableSelectorLib;assembly=Unv.PeriodicTableSelectorLib"
         Title="MainWindow" 
 		Height="350" Width="525">
-	<Window.Resources>
-
-	</Window.Resources>
 	<Grid>
-		<PeriodicTableSelectorLib:ChemicalElement AtomicMass="32.002" 
-												  AtomicNumber="5" 
-												  ChemicalName="Glsihe" 
-												  Symbol="Gl"
-												  Foreground="Blue"
-												  GlowBrush="Crimson" 
-												  Background="#FFFFFF55"/>
+		<PeriodicTableSelectorLib:PeriodicTable />
 	</Grid>
 </Window>

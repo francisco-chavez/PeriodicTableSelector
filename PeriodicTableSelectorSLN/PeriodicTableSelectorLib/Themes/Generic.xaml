@@ -127,7 +127,9 @@
 
 	<!-- Periodic Table Selector -->
 	<ControlTemplate x:Key="PeriodicTableTemplate" TargetType="local:PeriodicTable">
-		<Border/>
+		<Border>
+			<Canvas x:Name="PART_CanvasArea"/>
+		</Border>
 	</ControlTemplate>
 
 	<Style TargetType="local:PeriodicTable">
