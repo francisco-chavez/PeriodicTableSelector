@@ -15,17 +15,20 @@
 	<Style x:Key="ChemicalElement_TextBlockStyle_02" 
 		   TargetType="{x:Type TextBlock}" 
 		   BasedOn="{StaticResource ChemicalElement_TextBlockStyle_01}">
-		<Setter Property="FontSize"			Value="24"/>
+		<Setter Property="FontSize"			Value="26"/>
 		<Setter Property="FontWeight"		Value="Black"/>
 		<Setter Property="FontStyle"		Value="Italic"/>
 	</Style>
+	
+	<BlurEffect x:Key="GlowEffect"
+				Radius="10"/>
 	
 	<ControlTemplate x:Key="ChemicalElementTemplate" TargetType="local:ChemicalElement">
 		<Border BorderBrush="{TemplateBinding Foreground}" 
 				Background="{TemplateBinding Background}" 
 				BorderThickness="2"
 				Padding="2">
-			<Grid>
+			<Grid Margin="0,1,0,0">
 				<Grid.RowDefinitions>
 					<RowDefinition />
 					<RowDefinition />
@@ -36,8 +39,22 @@
 				<TextBlock Style="{StaticResource ChemicalElement_TextBlockStyle_01}" 
 						   Text="{TemplateBinding ChemicalName}" 
 						   Margin="1,2,1,0"
+						   Grid.Row="0" 
+						   Foreground="{TemplateBinding GlowBrush}"
+						   Effect="{StaticResource GlowEffect}"/>
+				<TextBlock Style="{StaticResource ChemicalElement_TextBlockStyle_01}" 
+						   Text="{TemplateBinding ChemicalName}" 
+						   Margin="1,2,1,0"
 						   Grid.Row="0"/>
 
+				<TextBlock Style="{StaticResource ChemicalElement_TextBlockStyle_01}" 
+						   Text="{Binding Path=AtomicNumber, 
+										  UpdateSourceTrigger=PropertyChanged, 
+										  RelativeSource={RelativeSource TemplatedParent}, 
+										  StringFormat=\{0:F0\}}" 
+						   Grid.Row="1"
+						   Foreground="{TemplateBinding GlowBrush}"
+						   Effect="{StaticResource GlowEffect}"/>
 				<TextBlock Style="{StaticResource ChemicalElement_TextBlockStyle_01}" 
 						   Text="{Binding Path=AtomicNumber, 
 										  UpdateSourceTrigger=PropertyChanged, 
@@ -47,6 +64,11 @@
 
 				<TextBlock Style="{StaticResource ChemicalElement_TextBlockStyle_02}" 
 						   Text="{TemplateBinding Symbol}" 
+						   Grid.Row="2"
+						   Foreground="{TemplateBinding GlowBrush}"
+						   Effect="{StaticResource GlowEffect}"/>
+				<TextBlock Style="{StaticResource ChemicalElement_TextBlockStyle_02}" 
+						   Text="{TemplateBinding Symbol}" 
 						   Grid.Row="2"/>
 
 				<TextBlock Style="{StaticResource ChemicalElement_TextBlockStyle_01}" 
@@ -54,7 +76,24 @@
 										  UpdateSourceTrigger=PropertyChanged, 
 										  RelativeSource={RelativeSource TemplatedParent}, 
 										  StringFormat=\{0:N\}}" 
+						   Grid.Row="3"
+						   Foreground="{TemplateBinding GlowBrush}"
+						   Effect="{StaticResource GlowEffect}"/>
+				<TextBlock Style="{StaticResource ChemicalElement_TextBlockStyle_01}" 
+						   Text="{Binding Path=AtomicMass, 
+										  UpdateSourceTrigger=PropertyChanged, 
+										  RelativeSource={RelativeSource TemplatedParent}, 
+										  StringFormat=\{0:N\}}" 
 						   Grid.Row="3"/>
+				
+				<Border Grid.Row="0"
+						Grid.RowSpan="4"
+						BorderBrush="{TemplateBinding GlowBrush}"
+						BorderThickness="2"
+						Background="{x:Null}"
+						Margin="-2,-3,-2,-2"
+						Effect="{StaticResource GlowEffect}"
+						ClipToBounds="True"/>
 			</Grid>
 		</Border>
 	</ControlTemplate>

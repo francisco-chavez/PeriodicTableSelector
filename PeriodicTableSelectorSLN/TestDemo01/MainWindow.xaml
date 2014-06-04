@@ -13,6 +13,7 @@
 												  ChemicalName="Glsihe" 
 												  Symbol="Gl"
 												  Foreground="Blue"
-												  Background="Orange"/>
+												  GlowBrush="Crimson" 
+												  Background="#FFFFFF55"/>
 	</Grid>
 </Window>

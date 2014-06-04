@@ -24,10 +24,18 @@ namespace Unv.PeriodicTableSelectorLib
 		public static readonly DependencyProperty AtomicNumberProperty;
 		public static readonly DependencyProperty AtomicMassProperty;
 		public static readonly DependencyProperty SymbolProperty;
+
+		public static readonly DependencyProperty GlowBrushProperty;
 		#endregion
 
 
 		#region Properties
+		public Brush GlowBrush
+		{
+			get { return (Brush) GetValue(GlowBrushProperty); }
+			set { SetValue(GlowBrushProperty, value); }
+		}
+
 		public string ChemicalName
 		{
 			get { return (string) GetValue(ChemicalNameProperty); }
@@ -85,6 +93,12 @@ namespace Unv.PeriodicTableSelectorLib
 				typeof(string),
 				typeof(ChemicalElement),
 				new PropertyMetadata(null));
+
+			GlowBrushProperty = DependencyProperty.Register(
+				"GlowBrush",
+				typeof(Brush),
+				typeof(ChemicalElement),
+				new PropertyMetadata(Brushes.Gold));
 		}
 		#endregion
 	}
