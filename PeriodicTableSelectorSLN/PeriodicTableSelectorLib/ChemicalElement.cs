@@ -16,8 +16,8 @@ using System.Windows.Shapes;
 
 namespace Unv.PeriodicTableSelectorLib
 {
-	public class ChemicalElement 
-		: ToggleButton
+	public class ChemicalElement
+	: ToggleButton
 	{
 		#region Attributes
 		public static readonly DependencyProperty ChemicalNameProperty;
@@ -58,27 +58,27 @@ namespace Unv.PeriodicTableSelectorLib
 		static ChemicalElement()
 		{
 			DefaultStyleKeyProperty.OverrideMetadata(
-				typeof(ChemicalElement), 
+				typeof(ChemicalElement),
 				new FrameworkPropertyMetadata(typeof(ChemicalElement)));
 
 
 			ChemicalNameProperty = DependencyProperty.Register(
-				"ChemicalName", 
-				typeof(string), 
+				"ChemicalName",
+				typeof(string),
 				typeof(ChemicalElement),
 				new PropertyMetadata(null));
 
 			AtomicNumberProperty = DependencyProperty.Register(
-				"AtomicNumber", 
-				typeof(int), 
-				typeof(ChemicalElement), 
+				"AtomicNumber",
+				typeof(int),
+				typeof(ChemicalElement),
 				new PropertyMetadata(0));
 
 			AtomicMassProperty = DependencyProperty.Register(
-				"AtomicMass", 
-				typeof(double), 
-				typeof(ChemicalElement), 
-				new PropertyMetadata(0));
+				"AtomicMass",
+				typeof(double),
+				typeof(ChemicalElement),
+				new PropertyMetadata(0.0));
 
 			SymbolProperty = DependencyProperty.Register(
 				"Symbol",

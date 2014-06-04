@@ -1,8 +1,18 @@
 ﻿<Window x:Class="TestDemo01.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+		xmlns:PeriodicTableSelectorLib="clr-namespace:Unv.PeriodicTableSelectorLib;assembly=Unv.PeriodicTableSelectorLib"
+        Title="MainWindow" 
+		Height="350" Width="525">
+	<Window.Resources>
+
+	</Window.Resources>
+	<Grid>
+		<PeriodicTableSelectorLib:ChemicalElement AtomicMass="32.002" 
+												  AtomicNumber="5" 
+												  ChemicalName="Glsihe" 
+												  Symbol="Gl"
+												  Foreground="Blue"
+												  Background="Orange"/>
+	</Grid>
 </Window>
