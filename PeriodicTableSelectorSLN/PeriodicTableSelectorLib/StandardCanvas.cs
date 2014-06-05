@@ -21,21 +21,36 @@ namespace Unv.PeriodicTableSelectorLib
 		public Dictionary<int, int> AtomicNumberToGroupMap	{ get; protected set; }
 		public Dictionary<int, int> AtomicNumberToPeriodMap { get; protected set; }
 
-		private double m_chemicalWidth = 60;
 		public double ChemicalElementWidth
 		{
 			get { return m_chemicalWidth; }
 			set 
 			{ 
-				foreach(UIElement child in InternalChildren)
-					if(child is ChemicalElement)
+				foreach (UIElement child in InternalChildren)
+					if (child is ChemicalElement)
 					{
 						((ChemicalElement) child).Width = value;
 					}
 				m_chemicalWidth = value; 
 			}
 		}
-		public double				ChemicalElementHeight	{ get; set; }
+		private double m_chemicalWidth = 60;
+
+		public double ChemicalElementHeight
+		{
+			get { return m_chemicalHeight; }
+			set
+			{
+				foreach (UIElement child in InternalChildren)
+					if (child is ChemicalElement)
+					{
+						((ChemicalElement) child).Height = value;
+					}
+
+				m_chemicalHeight = value;
+			}
+		}
+		private double m_chemicalHeight = 60;
 		#endregion
 
 
