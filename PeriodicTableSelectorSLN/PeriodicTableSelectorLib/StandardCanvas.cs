@@ -13,11 +13,29 @@ namespace Unv.PeriodicTableSelectorLib
 	public class StandardCanvas
 		: Canvas
 	{
+		#region Attributes
+		#endregion
+
+
 		#region Properties
 		public Dictionary<int, int> AtomicNumberToGroupMap	{ get; protected set; }
 		public Dictionary<int, int> AtomicNumberToPeriodMap { get; protected set; }
 
-		public FactoryBase			ChemicalElementFactory	{ get; set; }
+		private double m_chemicalWidth = 60;
+		public double ChemicalElementWidth
+		{
+			get { return m_chemicalWidth; }
+			set 
+			{ 
+				foreach(UIElement child in InternalChildren)
+					if(child is ChemicalElement)
+					{
+						((ChemicalElement) child).Width = value;
+					}
+				m_chemicalWidth = value; 
+			}
+		}
+		public double				ChemicalElementHeight	{ get; set; }
 		#endregion
 
 
@@ -26,6 +44,8 @@ namespace Unv.PeriodicTableSelectorLib
 		{
 			AtomicNumberToGroupMap = new Dictionary<int, int>(118);
 			AtomicNumberToPeriodMap = new Dictionary<int, int>(118);
+
+			ChemicalElementHeight = 60;
 
 			SetChemicalMetaData();
 		}
@@ -46,8 +66,8 @@ namespace Unv.PeriodicTableSelectorLib
 				{
 					var chem = (ChemicalElement) child;
 
-					size.Width = Math.Max(size.Width, desiredSize.Width * AtomicNumberToGroupMap[chem.AtomicNumber]);
-					size.Height = Math.Max(size.Height, desiredSize.Height * AtomicNumberToPeriodMap[chem.AtomicNumber]);
+					size.Width = Math.Max(size.Width, ChemicalElementWidth * AtomicNumberToGroupMap[chem.AtomicNumber]);
+					size.Height = Math.Max(size.Height, ChemicalElementHeight * AtomicNumberToPeriodMap[chem.AtomicNumber]);
 				}
 				else
 				{
@@ -72,8 +92,8 @@ namespace Unv.PeriodicTableSelectorLib
 
 					Rect r = new Rect(
 						new Point(
-							(AtomicNumberToGroupMap[chem.AtomicNumber] - 1) * desiredSize.Width,
-							(AtomicNumberToPeriodMap[chem.AtomicNumber] - 1) * desiredSize.Height),
+							(AtomicNumberToGroupMap[chem.AtomicNumber] - 1) * ChemicalElementWidth,
+							(AtomicNumberToPeriodMap[chem.AtomicNumber] - 1) * ChemicalElementHeight),
 						desiredSize);
 
 					child.Arrange(r);

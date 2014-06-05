@@ -26,8 +26,10 @@ namespace Unv.PeriodicTableSelectorLib
 	{
 		#region Attributes
 		public static readonly DependencyProperty ChemicalElementFactoryProperty;
+		public static readonly DependencyProperty ChemicalElementWidthProperty;
+		public static readonly DependencyProperty ChemicalElementHeightProperty;
 
-		private Canvas m_drawArea;
+		private StandardCanvas m_drawArea;
 		#endregion
 
 
@@ -41,6 +43,18 @@ namespace Unv.PeriodicTableSelectorLib
 		{
 			get { return (FactoryBase) GetValue(ChemicalElementFactoryProperty); }
 			set { SetValue(ChemicalElementFactoryProperty, value); }
+		}
+
+		public double ChemicalElementHeight
+		{
+			get { return (double) GetValue(ChemicalElementHeightProperty); }
+			set { SetValue(ChemicalElementHeightProperty, value); }
+		}
+
+		public double ChemicalElementWidth
+		{
+			get { return (double) GetValue(ChemicalElementWidthProperty); }
+			set { SetValue(ChemicalElementWidthProperty, value); }
 		}
 		#endregion
 
@@ -66,6 +80,23 @@ namespace Unv.PeriodicTableSelectorLib
 					null, 
 					FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.AffectsMeasure,
 					ChemicalElementFactory_Changed));
+
+			ChemicalElementWidthProperty = DependencyProperty.Register(
+				"ChemicalElementWidth",
+				typeof(double),
+				typeof(PeriodicTable),
+				new FrameworkPropertyMetadata(
+					80.0,
+					FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsParentArrange,
+					ChemicalWidth_Changed));
+
+			ChemicalElementHeightProperty = DependencyProperty.Register(
+				"ChemicalElementHeight",
+				typeof(double),
+				typeof(PeriodicTable),
+				new FrameworkPropertyMetadata(
+					110.0,
+					ChemicalHeight_Changed));
 		}
 		#endregion
 
@@ -82,7 +113,33 @@ namespace Unv.PeriodicTableSelectorLib
 				return;
 
 			foreach (var chem in factory.Elements)
+			{
+				chem.Width = pTable.ChemicalElementWidth;
+				chem.Height = pTable.ChemicalElementHeight;
 				pTable.Items.Add(chem);
+			}
+		}
+
+		private static void ChemicalWidth_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
+		{
+			var pTable = (PeriodicTable) d;
+
+			if (pTable.m_drawArea == null)
+				return;
+
+			double width = (double) e.NewValue;
+			pTable.m_drawArea.ChemicalElementWidth = width;
+		}
+
+		private static void ChemicalHeight_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
+		{
+			var pTable = (PeriodicTable) d;
+
+			if (pTable.m_drawArea == null)
+				return;
+
+			double height = (double) e.NewValue;
+			pTable.m_drawArea.ChemicalElementHeight = height;
 		}
 		#endregion
 
@@ -92,7 +149,12 @@ namespace Unv.PeriodicTableSelectorLib
 		{
 			base.OnApplyTemplate();
 
-			m_drawArea = GetTemplateChild("PART_CanvasArea") as Canvas;
+			m_drawArea = GetTemplateChild("PART_CanvasArea") as StandardCanvas;
+			if (m_drawArea != null)
+			{
+				m_drawArea.ChemicalElementWidth = this.ChemicalElementWidth;
+				m_drawArea.ChemicalElementHeight = this.ChemicalElementHeight;
+			}
 		}
 		#endregion
 	}
