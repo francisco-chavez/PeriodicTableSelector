@@ -3,6 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 		xmlns:PeriodicTableSelectorLib="clr-namespace:Unv.PeriodicTableSelectorLib;assembly=Unv.PeriodicTableSelectorLib"
         Title="MainWindow" 
+		UseLayoutRounding="True"
+		SnapsToDevicePixels="True"
 		Height="450" Width="725">
 	<Grid>
 		<PeriodicTableSelectorLib:PeriodicTable/>

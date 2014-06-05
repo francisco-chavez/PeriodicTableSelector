@@ -298,21 +298,36 @@ namespace Unv.PeriodicTableSelectorLib
 
 			///
 			/// Elements 46 - 50
+			///
+ 			AddMeta(46, 10, 5);
+			AddMeta(47, 11, 5);
+			AddMeta(48, 12, 5);
+			AddMeta(49, 13, 5);
+			AddMeta(50, 14, 5);
+
+			///
+			/// Elements 51 - 55
 			/// 
-			agMap.Add(46, 10);
-			apMap.Add(46, 5);
+			AddMeta(51, 15, 5);
+			AddMeta(52, 16, 5);
+			AddMeta(53, 17, 5);
+			AddMeta(54, 18, 5);
+			AddMeta(55, 1, 6);
 
-			agMap.Add(47, 11);
-			apMap.Add(47, 5);
+			///
+			/// Elements 56 - 60
+			/// 
+			AddMeta(56, 2, 6);
+			AddMeta(57, -1, 6);
+			AddMeta(58, -1, 6);
+			AddMeta(59, -1, 6);
+			AddMeta(60, -1, 6);
+		}
 
-			agMap.Add(48, 12);
-			apMap.Add(48, 5);
-
-			agMap.Add(49, 13);
-			apMap.Add(49, 5);
-
-			agMap.Add(50, 14);
-			apMap.Add(50, 5);
+		private void AddMeta(int key, int group, int period)
+		{
+			AtomicNumberToGroupMap.Add(key, group);
+			AtomicNumberToPeriodMap.Add(key, period);
 		}
 		#endregion
 	}

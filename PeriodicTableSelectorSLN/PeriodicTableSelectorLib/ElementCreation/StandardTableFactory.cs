@@ -188,6 +188,24 @@ namespace Unv.PeriodicTableSelectorLib.ElementCreation
 			CreateNewElement(49, "In", "Indium",	114.818,	elements);
 			CreateNewElement(50, "Sn", "Tin",		118.710,	elements);
 
+			///
+			/// Elements 51 - 55
+			/// 
+			CreateNewElement(51, "Sb", "Antimony", 121.760, elements);
+			CreateNewElement(52, "Te", "Tellurium", 127.60, elements);
+			CreateNewElement(53, "I", "Iodine", 126.90447, elements);
+			CreateNewElement(54, "Xe", "Xenon", 131.293, elements);
+			CreateNewElement(55, "Cs", "Caesium", 132.9054519, elements);
+
+			///
+			/// Elements 56 - 60
+			/// 
+			CreateNewElement(56, "Ba", "Barium", 137.327, elements);
+			CreateNewElement(57, "La", "Lanthanum", 138.90547, elements);
+			CreateNewElement(58, "Ce", "Cerium", 140.116, elements);
+			CreateNewElement(59, "Pr", "Praseodymium", 140.90765, elements);
+			CreateNewElement(60, "Nd", "Neodymium", 144.242, elements);
+
 			return elements;
 		}
 
