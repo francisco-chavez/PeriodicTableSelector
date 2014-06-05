@@ -63,14 +63,22 @@ namespace Unv.PeriodicTableSelectorLib
 		{
 			foreach (UIElement child in InternalChildren)
 			{
-				child.Arrange(new Rect(arrangeSize));
+				//child.Arrange(new Rect(arrangeSize));
 
 				if (child is ChemicalElement)
 				{
 					var chem = (ChemicalElement) child;
+					var desiredSize = chem.DesiredSize;
 
-					Canvas.SetLeft(chem, (AtomicNumberToGroupMap[chem.AtomicNumber] - 1) * chem.ActualWidth);
-					Canvas.SetTop(chem, (AtomicNumberToPeriodMap[chem.AtomicNumber] - 1) * chem.ActualHeight);
+					Rect r = new Rect(
+						new Point(
+							(AtomicNumberToGroupMap[chem.AtomicNumber] - 1) * desiredSize.Width,
+							(AtomicNumberToPeriodMap[chem.AtomicNumber] - 1) * desiredSize.Height),
+						desiredSize);
+
+					child.Arrange(r);
+					//Canvas.SetLeft(chem, (AtomicNumberToGroupMap[chem.AtomicNumber] - 1) * chem.ActualWidth);
+					//Canvas.SetTop(chem, (AtomicNumberToPeriodMap[chem.AtomicNumber] - 1) * chem.ActualHeight);
 				}
 			}
 

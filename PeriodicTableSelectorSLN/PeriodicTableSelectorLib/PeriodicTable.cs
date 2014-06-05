@@ -27,9 +27,6 @@ namespace Unv.PeriodicTableSelectorLib
 		#region Attributes
 		public static readonly DependencyProperty ChemicalElementFactoryProperty;
 
-		private static readonly DependencyPropertyKey ChemicalElementsPropertyKey;
-		private static readonly DependencyProperty ChemicalElementsProperty;
-
 		private Canvas m_drawArea;
 		#endregion
 
