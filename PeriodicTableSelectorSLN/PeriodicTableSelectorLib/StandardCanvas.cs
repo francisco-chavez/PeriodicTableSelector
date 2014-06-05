@@ -276,25 +276,14 @@ namespace Unv.PeriodicTableSelectorLib
 			agMap.Add(40, 4);
 			apMap.Add(40, 5);
 
-
 			///
 			/// Elements 41 - 45
 			/// 
-			agMap.Add(41, 5);
-			apMap.Add(41, 5);
-
-			agMap.Add(42, 6);
-			apMap.Add(42, 5);
-
-			agMap.Add(43, 7);
-			apMap.Add(43, 5);
-
-			agMap.Add(44, 8);
-			apMap.Add(44, 5);
-
-			agMap.Add(45, 9);
-			apMap.Add(45, 5);
-
+			AddMeta(41, 5, 5);
+			AddMeta(42, 6, 5);
+			AddMeta(43, 7, 5);
+			AddMeta(44, 8, 5);
+			AddMeta(45, 9, 5);
 
 			///
 			/// Elements 46 - 50
@@ -322,6 +311,24 @@ namespace Unv.PeriodicTableSelectorLib
 			AddMeta(58, -1, 6);
 			AddMeta(59, -1, 6);
 			AddMeta(60, -1, 6);
+
+			///
+			/// Elements 61 - 65
+			///
+			AddMeta(61, -1, 6);
+			AddMeta(62, -1, 6);
+			AddMeta(63, -1, 6);
+			AddMeta(64, -1, 6);
+			AddMeta(65, -1, 6);
+
+			///
+			/// Elements 66 - 70
+			/// 
+			AddMeta(66, -1, 6);
+			AddMeta(67, -1, 6);
+			AddMeta(68, -1, 6);
+			AddMeta(69, -1, 6);
+			AddMeta(70, -1, 6);
 		}
 
 		private void AddMeta(int key, int group, int period)

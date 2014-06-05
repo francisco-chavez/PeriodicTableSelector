@@ -10,7 +10,7 @@
 		<Setter Property="VerticalAlignment" Value="Center"/>
 		<Setter Property="FontFamily"		Value="Vani"/>
 		
-		<Setter Property="FontSize"			Value="13"/>
+		<Setter Property="FontSize"			Value="12"/>
 	</Style>
 	<Style x:Key="ChemicalElement_TextBlockStyle_02" 
 		   TargetType="{x:Type TextBlock}" 
