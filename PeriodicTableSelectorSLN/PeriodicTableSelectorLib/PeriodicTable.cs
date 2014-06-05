@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -7,24 +9,26 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-using Unv.PeriodicTableSelectorLib.ElementConfiguration;
 using Unv.PeriodicTableSelectorLib.ElementCreation;
 
 
 namespace Unv.PeriodicTableSelectorLib
 {
-	[TemplatePart(Name = "PART_CanvasArea", Type = typeof(Canvas))]
+	[TemplatePart(Name = "PART_CanvasArea", Type = typeof(StandardCanvas))]
 	public class PeriodicTable 
-		: Control
+		: ItemsControl
 	{
 		#region Attributes
 		public static readonly DependencyProperty ChemicalElementFactoryProperty;
-		public static readonly DependencyProperty ChemicalElementPlacerProperty;
+
+		private static readonly DependencyPropertyKey ChemicalElementsPropertyKey;
+		private static readonly DependencyProperty ChemicalElementsProperty;
 
 		private Canvas m_drawArea;
 		#endregion
@@ -41,16 +45,6 @@ namespace Unv.PeriodicTableSelectorLib
 			get { return (FactoryBase) GetValue(ChemicalElementFactoryProperty); }
 			set { SetValue(ChemicalElementFactoryProperty, value); }
 		}
-
-		/// <summary>
-		/// Gets or sets the class object that's in charge of the
-		/// placement of the chemical element objects on the GUI.
-		/// </summary>
-		public ElementArrangementBase ChemicalElementPlacer
-		{
-			get { return (ElementArrangementBase) GetValue(ChemicalElementPlacerProperty); }
-			set { SetValue(ChemicalElementPlacerProperty, value); }
-		}
 		#endregion
 
 
@@ -58,7 +52,6 @@ namespace Unv.PeriodicTableSelectorLib
 		public PeriodicTable()
 		{
 			ChemicalElementFactory	= new StandardTableFactory();
-			ChemicalElementPlacer	= new StandardTableArrangement();
 		}
 
 		static PeriodicTable()
@@ -76,15 +69,6 @@ namespace Unv.PeriodicTableSelectorLib
 					null, 
 					FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.AffectsMeasure,
 					ChemicalElementFactory_Changed));
-
-			ChemicalElementPlacerProperty = DependencyProperty.Register(
-				"ChemicalElementPlacer",
-				typeof(ElementArrangementBase),
-				typeof(PeriodicTable),
-				new FrameworkPropertyMetadata(
-					null,
-					FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.AffectsMeasure,
-					ChemicalElementPlacer_Changed));
 		}
 		#endregion
 
@@ -94,73 +78,24 @@ namespace Unv.PeriodicTableSelectorLib
 		{
 			PeriodicTable pTable = (PeriodicTable) d;
 
-			pTable.ClearCanvas();
-			pTable.PopulateCanvas((FactoryBase) e.NewValue, pTable.ChemicalElementPlacer);
-		}
+			pTable.Items.Clear();
 
-		private static void ChemicalElementPlacer_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
-		{
-			PeriodicTable pTable = (PeriodicTable) d;
+			var factory = e.NewValue as FactoryBase;
+			if (factory == null)
+				return;
 
-			pTable.ClearCanvas();
-			pTable.PopulateCanvas(pTable.ChemicalElementFactory, (ElementArrangementBase) e.NewValue);
+			foreach (var chem in factory.Elements)
+				pTable.Items.Add(chem);
 		}
 		#endregion
 
 
 		#region Methods
-		//protected override Size MeasureOverride(Size constraint)
-		//{
-		//	var defaultSize = base.MeasureOverride(constraint);
-
-		//	if (m_drawArea == null || ChemicalElementFactory == null || ChemicalElementPlacer == null)
-		//		return defaultSize;
-
-		//	return ChemicalElementPlacer.MeasureElements(constraint, ChemicalElementFactory);
-		//}
-
-		//protected override Size ArrangeOverride(Size arrangeBounds)
-		//{
-		//	var defaultSize = base.ArrangeOverride(arrangeBounds);
-
-		//	if (m_drawArea == null || ChemicalElementFactory == null || ChemicalElementPlacer == null)
-		//		return defaultSize;
-
-		//	Size realSize = ChemicalElementPlacer.ArrangeElements(m_drawArea, arrangeBounds, ChemicalElementFactory);
-		//	m_drawArea.Measure(realSize);
-		//	m_drawArea.Arrange(new Rect(realSize));
-
-		//	return defaultSize;
-		//}
-
 		public override void OnApplyTemplate()
 		{
 			base.OnApplyTemplate();
 
 			m_drawArea = GetTemplateChild("PART_CanvasArea") as Canvas;
-			PopulateCanvas(ChemicalElementFactory, ChemicalElementPlacer);
-		}
-
-		private void PopulateCanvas(FactoryBase chemicalFactory, ElementArrangementBase elementPlacer)
-		{
-			if (chemicalFactory == null)
-				return;
-
-			if (elementPlacer == null)
-				return;
-
-			if (m_drawArea == null)
-				return;
-
-			m_drawArea.Children.Clear();
-			elementPlacer.InsertElements(m_drawArea, chemicalFactory);
-			elementPlacer.ArrangeElements(m_drawArea, chemicalFactory);
-		}
-
-		private void ClearCanvas()
-		{
-			if (m_drawArea != null)
-				m_drawArea.Children.Clear();
 		}
 		#endregion
 	}

@@ -49,11 +49,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChemicalElement.cs" />
-    <Compile Include="ElementConfiguration\ElementArrangementBase.cs" />
-    <Compile Include="ElementConfiguration\StandardTableArrangement.cs" />
     <Compile Include="ElementCreation\FactoryBase.cs" />
     <Compile Include="ElementCreation\StandardTableFactory.cs" />
-    <Compile Include="MeasuredCanvas.cs" />
     <Compile Include="PeriodicTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -68,6 +65,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="StandardCanvas.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

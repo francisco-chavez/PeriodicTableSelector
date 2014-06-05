@@ -141,7 +141,8 @@
 					 VerticalAlignment="Stretch"
 					 Stretch="Uniform"
 					 StretchDirection="Both">
-				<local:MeasuredCanvas x:Name="PART_CanvasArea"/>
+				<local:StandardCanvas x:Name="PART_CanvasArea"
+									  IsItemsHost="True"/>
 			</Viewbox>
 		</Border>
 	</ControlTemplate>
