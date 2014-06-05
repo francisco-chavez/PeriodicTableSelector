@@ -237,6 +237,82 @@ namespace Unv.PeriodicTableSelectorLib
 
 			agMap.Add(30, 12);
 			apMap.Add(30, 4);
+
+
+			///
+			/// Elements 31 - 35
+			/// 
+			agMap.Add(31, 13);
+			apMap.Add(31, 4);
+
+			agMap.Add(32, 14);
+			apMap.Add(32, 4);
+
+			agMap.Add(33, 15);
+			apMap.Add(33, 4);
+
+			agMap.Add(34, 16);
+			apMap.Add(34, 4);
+
+			agMap.Add(35, 17);
+			apMap.Add(35, 4);
+
+
+			///
+			/// Elements 36 - 40
+			/// 
+			agMap.Add(36, 18);
+			apMap.Add(36, 4);
+
+			agMap.Add(37, 1);
+			apMap.Add(37, 5);
+
+			agMap.Add(38, 2);
+			apMap.Add(38, 5);
+
+			agMap.Add(39, 3);
+			apMap.Add(39, 5);
+
+			agMap.Add(40, 4);
+			apMap.Add(40, 5);
+
+
+			///
+			/// Elements 41 - 45
+			/// 
+			agMap.Add(41, 5);
+			apMap.Add(41, 5);
+
+			agMap.Add(42, 6);
+			apMap.Add(42, 5);
+
+			agMap.Add(43, 7);
+			apMap.Add(43, 5);
+
+			agMap.Add(44, 8);
+			apMap.Add(44, 5);
+
+			agMap.Add(45, 9);
+			apMap.Add(45, 5);
+
+
+			///
+			/// Elements 46 - 50
+			/// 
+			agMap.Add(46, 10);
+			apMap.Add(46, 5);
+
+			agMap.Add(47, 11);
+			apMap.Add(47, 5);
+
+			agMap.Add(48, 12);
+			apMap.Add(48, 5);
+
+			agMap.Add(49, 13);
+			apMap.Add(49, 5);
+
+			agMap.Add(50, 14);
+			apMap.Add(50, 5);
 		}
 		#endregion
 	}

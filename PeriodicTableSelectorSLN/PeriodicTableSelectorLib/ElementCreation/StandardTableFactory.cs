@@ -152,6 +152,42 @@ namespace Unv.PeriodicTableSelectorLib.ElementCreation
 			CreateNewElement(29, "Cu", "Copper",	63.546,		elements);
 			CreateNewElement(30, "Zn", "Zinc",		65.38,		elements);
 
+			///
+			/// Elements 31 - 35
+			/// 
+			CreateNewElement(31, "Ga", "Gallium",	69.723,		elements);
+			CreateNewElement(32, "Ge", "Germinium", 72.630,		elements);
+			CreateNewElement(33, "As", "Arsenic",	74.92160,	elements);
+			CreateNewElement(34, "Se", "Selenium",	78.96,		elements);
+			CreateNewElement(35, "Br", "Bromine",	79.904,		elements);
+
+			///
+			/// Elements 36 - 40
+			/// 
+			CreateNewElement(36, "Kr", "Krypton",	83.798,		elements);
+			CreateNewElement(37, "Rb", "Rubidium",	85.4678,	elements);
+			CreateNewElement(38, "Sr", "Strontium", 87.62,		elements);
+			CreateNewElement(39, "Y",  "Yttrium",	88.90585,	elements);
+			CreateNewElement(40, "Zr", "Zirconium", 91.224,		elements);
+
+			///
+			/// Elements 41 - 45
+			/// 
+			CreateNewElement(41, "Nb", "Niobium",		 92.90638,	elements);
+			CreateNewElement(42, "Mo", "Molybdenum",	 95.96,		elements);
+			CreateNewElement(43, "Tc", "Technetium",	 98,		elements);
+			CreateNewElement(44, "Ru", "Ruthenium",		101.07,		elements);
+			CreateNewElement(45, "Rh", "Rhodium",		102.90550,	elements);
+
+			///
+			/// Elements 46 - 50
+			/// 
+			CreateNewElement(46, "Pd", "Palladium", 106.42,		elements);
+			CreateNewElement(47, "Ag", "Silver",	107.8682,	elements);
+			CreateNewElement(48, "Cd", "Cadmium",	112.411,	elements);
+			CreateNewElement(49, "In", "Indium",	114.818,	elements);
+			CreateNewElement(50, "Sn", "Tin",		118.710,	elements);
+
 			return elements;
 		}
 
