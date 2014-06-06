@@ -142,7 +142,8 @@
 					 Stretch="Uniform"
 					 StretchDirection="Both">
 				<local:StandardCanvas x:Name="PART_CanvasArea"
-									  IsItemsHost="True"/>
+									  IsItemsHost="True" 
+									  Margin="1"/>
 			</Viewbox>
 		</Border>
 	</ControlTemplate>

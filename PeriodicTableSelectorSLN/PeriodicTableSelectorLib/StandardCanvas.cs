@@ -72,51 +72,82 @@ namespace Unv.PeriodicTableSelectorLib
 		{
 			Size size = new Size();
 
-			foreach (UIElement child in this.InternalChildren)
+			int maxGroup = 0;
+			int maxPeriod = 0;
+			foreach (UIElement child in InternalChildren)
 			{
 				child.Measure(constraint);
-				var desiredSize = child.DesiredSize;
 
 				if (child is ChemicalElement)
 				{
-					var chem = (ChemicalElement) child;
+					ChemicalElement chem = (ChemicalElement) child;
+					maxGroup = Math.Max(maxGroup, AtomicNumberToGroupMap[chem.AtomicNumber]);
+					maxPeriod = Math.Max(maxPeriod, AtomicNumberToPeriodMap[chem.AtomicNumber]);
+					continue;
+				}
 
-					size.Width = Math.Max(size.Width, ChemicalElementWidth * AtomicNumberToGroupMap[chem.AtomicNumber]);
-					size.Height = Math.Max(size.Height, ChemicalElementHeight * AtomicNumberToPeriodMap[chem.AtomicNumber]);
-				}
-				else
-				{
-					size.Width = Math.Max(size.Width, desiredSize.Width);
-					size.Height = Math.Max(size.Height, desiredSize.Height);
-				}
+				var desiredSize = child.DesiredSize;
+				size.Width = Math.Max(size.Width, desiredSize.Width + Canvas.GetLeft(child));
+				size.Height = Math.Max(size.Height, desiredSize.Height + Canvas.GetTop(child));
 			}
+
+			size.Width = Math.Max(size.Width, maxGroup * ChemicalElementWidth);
+			size.Height = Math.Max(size.Height, maxPeriod * ChemicalElementHeight + ChemicalElementHeight * 2.5);
+
+			var margin = this.Margin;
+			size.Width += margin.Left + margin.Right;
+			size.Height += margin.Top + margin.Bottom;
 
 			return size;
 		}
 
 		protected override Size ArrangeOverride(Size arrangeSize)
 		{
+			List<ChemicalElement> rareEarths = new List<ChemicalElement>(28);
+			double bottom = 0;
+			Size elementSize = new Size(ChemicalElementWidth, ChemicalElementHeight);
+			double extraTop = Margin.Top;
+			double extraLeft = Margin.Left;
+
 			foreach (UIElement child in InternalChildren)
 			{
-				//child.Arrange(new Rect(arrangeSize));
-
 				if (child is ChemicalElement)
 				{
 					var chem = (ChemicalElement) child;
-					var desiredSize = chem.DesiredSize;
 
-					Rect r = new Rect(
-						new Point(
-							(AtomicNumberToGroupMap[chem.AtomicNumber] - 1) * ChemicalElementWidth,
-							(AtomicNumberToPeriodMap[chem.AtomicNumber] - 1) * ChemicalElementHeight),
-						desiredSize);
+					int group = AtomicNumberToGroupMap[chem.AtomicNumber];
+					if (group < 0)
+					{
+						rareEarths.Add(chem);
+					}
+					else
+					{
+						Rect r = new Rect(
+							new Point(
+								(group - 1) * ChemicalElementWidth + extraLeft,
+								(AtomicNumberToPeriodMap[chem.AtomicNumber] - 1) * ChemicalElementHeight + extraTop),
+							elementSize);
 
-					child.Arrange(r);
-					//Canvas.SetLeft(chem, (AtomicNumberToGroupMap[chem.AtomicNumber] - 1) * chem.ActualWidth);
-					//Canvas.SetTop(chem, (AtomicNumberToPeriodMap[chem.AtomicNumber] - 1) * chem.ActualHeight);
-				}
+						bottom = Math.Max(bottom, r.Bottom);
+						child.Arrange(r);
+					}
+				}	// End child portion
+			}	// End loop
+
+			bottom += elementSize.Height / 2;
+
+			for (int i = 0; i < rareEarths.Count; i++)
+			{
+				Rect r = new Rect(
+					new Point(
+						i * elementSize.Width + extraLeft,
+						bottom + extraTop),
+					elementSize);
+
+				rareEarths[i].Arrange(r);
 			}
 
+			rareEarths.Clear();
 			return arrangeSize;
 		}
 
