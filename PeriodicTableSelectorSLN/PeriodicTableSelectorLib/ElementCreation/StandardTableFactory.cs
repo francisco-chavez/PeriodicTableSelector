@@ -224,6 +224,24 @@ namespace Unv.PeriodicTableSelectorLib.ElementCreation
 			CreateNewElement(69, "Tm", "Thulium",		168.93421,	elements);
 			CreateNewElement(70, "Yb", "Ytterbium",		173.054,	elements);
 
+			///
+			/// Elements 71 - 75
+			///
+			CreateNewElement(71, "Lu", "Lutetium",	174.9668,	elements);
+			CreateNewElement(72, "Hf", "Hafnium",	178.49,		elements);
+			CreateNewElement(73, "Ta", "Tantalum",	180.94788,	elements);
+			CreateNewElement(74, "W",  "Tungsten",	183.84,		elements);
+			CreateNewElement(75, "Re", "Rhenium",	186.207,	elements);
+
+			///
+			/// Elements 76 - 80
+			/// 
+			CreateNewElement(76, "Os", "Osmium",	190.23,		elements);
+			CreateNewElement(77, "Ir", "Iridium",	192.217,	elements);
+			CreateNewElement(78, "Pt", "Platinum",	195.084,	elements);
+			CreateNewElement(79, "Au", "Gold",		196.966569, elements);
+			CreateNewElement(80, "Hg", "Mercury",	200.592,	elements);
+
 			return elements;
 		}
 
