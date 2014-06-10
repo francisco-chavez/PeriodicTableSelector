@@ -3,8 +3,7 @@
 					xmlns:local="clr-namespace:Unv.PeriodicTableSelectorLib">
 
 	<!-- Chemical Element -->
-	<Style x:Key="ChemicalElement_TextBlockStyle_01" 
-		   TargetType="{x:Type TextBlock}">
+	<Style x:Key="ChemicalElement_TextBlockStyle_01" TargetType="TextBlock">
 		<Setter Property="TextAlignment"	Value="Center"/>
 		<Setter Property="HorizontalAlignment" Value="Center"/>
 		<Setter Property="VerticalAlignment" Value="Center"/>
@@ -12,16 +11,14 @@
 		
 		<Setter Property="FontSize"			Value="12"/>
 	</Style>
-	<Style x:Key="ChemicalElement_TextBlockStyle_02" 
-		   TargetType="{x:Type TextBlock}" 
-		   BasedOn="{StaticResource ChemicalElement_TextBlockStyle_01}">
-		<Setter Property="FontSize"			Value="26"/>
+	<Style x:Key="ChemicalSymbol_Style" TargetType="Run">
+		<Setter Property="FontSize"			Value="24"/>
 		<Setter Property="FontWeight"		Value="Black"/>
 		<Setter Property="FontStyle"		Value="Italic"/>
 	</Style>
 	
 	<BlurEffect x:Key="GlowEffect"
-				Radius="10"/>
+				Radius="14"/>
 	
 	<ControlTemplate x:Key="ChemicalElementTemplate" TargetType="local:ChemicalElement">
 		<Border BorderBrush="{TemplateBinding Foreground}" 
@@ -29,74 +26,48 @@
 				BorderThickness="2"
 				Padding="2">
 			<Grid Margin="0,1,0,0">
-				<Grid.RowDefinitions>
-					<RowDefinition />
-					<RowDefinition />
-					<RowDefinition Height="1.5*"/>
-					<RowDefinition />
-				</Grid.RowDefinitions>
-
 				<TextBlock x:Name="GlowItem00" 
-						   Style="{StaticResource ChemicalElement_TextBlockStyle_01}" 
-						   Text="{TemplateBinding ChemicalName}" 
-						   Margin="1,2,1,0"
-						   Grid.Row="0" 
+						   Grid.Row="0"
 						   Foreground="{TemplateBinding GlowBrush}"
 						   Effect="{StaticResource GlowEffect}"
-						   Visibility="Hidden"/>
-				<TextBlock Style="{StaticResource ChemicalElement_TextBlockStyle_01}" 
-						   Text="{TemplateBinding ChemicalName}" 
-						   Margin="1,2,1,0"
-						   Grid.Row="0"/>
+						   Visibility="Hidden"
+						   Style="{StaticResource ChemicalElement_TextBlockStyle_01}">
+					<Run Text="{TemplateBinding ChemicalName}"/>
+					<Run Text="&#x0a;"/>
+					<Run Text="{Binding Path=AtomicNumber, 
+										UpdateSourceTrigger=PropertyChanged, 
+										RelativeSource={RelativeSource TemplatedParent}, 
+										StringFormat=\{0:F0\}}"/>
+					<Run Text="&#x0a;"/>
+					<Run Text="{TemplateBinding Symbol}"
+						 Style="{StaticResource ChemicalSymbol_Style}"/>
+					<Run Text="&#x0a;"/>
+					<Run Text="{Binding Path=AtomicMass, 
+										UpdateSourceTrigger=PropertyChanged, 
+										RelativeSource={RelativeSource TemplatedParent}, 
+										StringFormat=\{0:N\}}"/>
+				</TextBlock>
+				<TextBlock Grid.Row="0"
+						   Grid.RowSpan="4"
+						   Style="{StaticResource ChemicalElement_TextBlockStyle_01}">
+					<Run Text="{TemplateBinding ChemicalName}"/>
+					<Run Text="&#x0a;"/>
+					<Run Text="{Binding Path=AtomicNumber, 
+										UpdateSourceTrigger=PropertyChanged, 
+										RelativeSource={RelativeSource TemplatedParent}, 
+										StringFormat=\{0:F0\}}"/>
+					<Run Text="&#x0a;"/>
+					<Run Text="{TemplateBinding Symbol}"
+						 Style="{StaticResource ChemicalSymbol_Style}"/>
+					<Run Text="&#x0a;"/>
+					<Run Text="{Binding Path=AtomicMass, 
+										UpdateSourceTrigger=PropertyChanged, 
+										RelativeSource={RelativeSource TemplatedParent}, 
+										StringFormat=\{0:N\}}"/>
+				</TextBlock>
 
-				<TextBlock x:Name="GlowItem01" 
-						   Style="{StaticResource ChemicalElement_TextBlockStyle_01}" 
-						   Text="{Binding Path=AtomicNumber, 
-										  UpdateSourceTrigger=PropertyChanged, 
-										  RelativeSource={RelativeSource TemplatedParent}, 
-										  StringFormat=\{0:F0\}}" 
-						   Grid.Row="1"
-						   Foreground="{TemplateBinding GlowBrush}"
-						   Effect="{StaticResource GlowEffect}"
-						   Visibility="Hidden"/>
-				<TextBlock Style="{StaticResource ChemicalElement_TextBlockStyle_01}" 
-						   Text="{Binding Path=AtomicNumber, 
-										  UpdateSourceTrigger=PropertyChanged, 
-										  RelativeSource={RelativeSource TemplatedParent}, 
-										  StringFormat=\{0:F0\}}" 
-						   Grid.Row="1"/>
-
-				<TextBlock x:Name="GlowItem02" 
-						   Style="{StaticResource ChemicalElement_TextBlockStyle_02}" 
-						   Text="{TemplateBinding Symbol}" 
-						   Grid.Row="2"
-						   Foreground="{TemplateBinding GlowBrush}"
-						   Effect="{StaticResource GlowEffect}"
-						   Visibility="Hidden"/>
-				<TextBlock Style="{StaticResource ChemicalElement_TextBlockStyle_02}" 
-						   Text="{TemplateBinding Symbol}" 
-						   Grid.Row="2"/>
-
-				<TextBlock x:Name="GlowItem03" 
-						   Style="{StaticResource ChemicalElement_TextBlockStyle_01}" 
-						   Text="{Binding Path=AtomicMass, 
-										  UpdateSourceTrigger=PropertyChanged, 
-										  RelativeSource={RelativeSource TemplatedParent}, 
-										  StringFormat=\{0:N\}}" 
-						   Grid.Row="3"
-						   Foreground="{TemplateBinding GlowBrush}"
-						   Effect="{StaticResource GlowEffect}"
-						   Visibility="Hidden"/>
-				<TextBlock Style="{StaticResource ChemicalElement_TextBlockStyle_01}" 
-						   Text="{Binding Path=AtomicMass, 
-										  UpdateSourceTrigger=PropertyChanged, 
-										  RelativeSource={RelativeSource TemplatedParent}, 
-										  StringFormat=\{0:N\}}" 
-						   Grid.Row="3"/>
-				
-				<Border x:Name="GlowItem04" 
+				<Border x:Name="GlowItem01" 
 						Grid.Row="0"
-						Grid.RowSpan="4"
 						BorderBrush="{TemplateBinding GlowBrush}"
 						BorderThickness="2"
 						Background="{x:Null}"
@@ -111,9 +82,6 @@
 			<Trigger Property="IsChecked" Value="True">
 				<Setter Property="Visibility" Value="Visible" TargetName="GlowItem00"/>
 				<Setter Property="Visibility" Value="Visible" TargetName="GlowItem01"/>
-				<Setter Property="Visibility" Value="Visible" TargetName="GlowItem02"/>
-				<Setter Property="Visibility" Value="Visible" TargetName="GlowItem03"/>
-				<Setter Property="Visibility" Value="Visible" TargetName="GlowItem04"/>
 			</Trigger>
 		</ControlTemplate.Triggers>
 	</ControlTemplate>
