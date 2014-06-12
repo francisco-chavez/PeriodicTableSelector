@@ -248,6 +248,22 @@ namespace Unv.PeriodicTableSelectorLib.ElementCreation
 			CreateNewElement(99,  "Es", "Einsteinium",	252,		elements);
 			CreateNewElement(100, "Fm", "Fermium",		257,		elements);
 
+			///
+			/// Elements 101 - 110
+			/// 
+			CreateNewElement(101, "Md", "Mendelevium",		258, elements);
+			CreateNewElement(102, "No", "Nobelium",			259, elements);
+			CreateNewElement(103, "Lr", "Lawrencium",		266, elements);
+			CreateNewElement(104, "Rf", "Rutherfordium",	267, elements);
+			CreateNewElement(105, "Db", "Dubnium",			268, elements);
+
+			CreateNewElement(106, "Sg", "Seaborgium",		269, elements);
+			CreateNewElement(107, "Bh", "Bohrium",			270, elements);
+			CreateNewElement(108, "Hs", "Hassium",			269, elements);
+			CreateNewElement(109, "Mt", "Meitnerium",		278, elements);
+			CreateNewElement(110, "Ds", "Darmstadtium",		281, elements);
+
+
 			return elements;
 		}
 

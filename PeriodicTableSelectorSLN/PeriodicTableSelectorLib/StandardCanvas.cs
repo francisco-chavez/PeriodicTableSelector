@@ -195,64 +195,29 @@ namespace Unv.PeriodicTableSelectorLib
 
 
 			///
-			/// Elements 11 - 15
+			/// Elements 11 - 20
 			/// 
-			agMap.Add(11, 1);
-			apMap.Add(11, 3);
+			AddMeta(11, 1, 3);
+			AddMeta(12, 2, 3);
+			AddMeta(13, 13, 3);
+			AddMeta(14, 14, 3);
+			AddMeta(15, 15, 3);
 
-			agMap.Add(12, 2);
-			apMap.Add(12, 3);
-
-			agMap.Add(13, 13);
-			apMap.Add(13, 3);
-
-			agMap.Add(14, 14);
-			apMap.Add(14, 3);
-
-			agMap.Add(15, 15);
-			apMap.Add(15, 3);
-
-
-			///
-			/// Elements 16 - 20
-			/// 
-			agMap.Add(16, 16);
-			apMap.Add(16, 3);
-
-			agMap.Add(17, 17);
-			apMap.Add(17, 3);
-
-			agMap.Add(18, 18);
-			apMap.Add(18, 3);
-
-			agMap.Add(19, 1);
-			apMap.Add(19, 4);
-
-			agMap.Add(20, 2);
-			apMap.Add(20, 4);
-
+			AddMeta(16, 16, 3);
+			AddMeta(17, 17, 3);
+			AddMeta(18, 18, 3);
+			AddMeta(19, 1, 4);
+			AddMeta(20, 2, 4);
 		
 			///
-			/// Elements 21 - 25
+			/// Elements 21 - 30
 			/// 
-			agMap.Add(21, 3);
-			apMap.Add(21, 4);
+			AddMeta(21, 3, 4);
+			AddMeta(22, 4, 4);
+			AddMeta(23, 5, 4);
+			AddMeta(24, 6, 4);
+			AddMeta(25, 7, 4);
 
-			agMap.Add(22, 4);
-			apMap.Add(22, 4);
-
-			agMap.Add(23, 5);
-			apMap.Add(23, 4);
-
-			agMap.Add(24, 6);
-			apMap.Add(24, 4);
-
-			agMap.Add(25, 7);
-			apMap.Add(25, 4);
-
-			///
-			/// Elements 26 - 30
-			/// 
 			AddMeta(26, 8, 4);
 			AddMeta(27, 9, 4);
 			AddMeta(28, 10, 4);
@@ -363,8 +328,28 @@ namespace Unv.PeriodicTableSelectorLib
 			AddMeta(98, -1, 7);
 			AddMeta(99, -1, 7);
 			AddMeta(100, -1, 7);
+
+			///
+			/// Elements 101 - 110
+			/// 
+			AddMeta(101, -1, 7);
+			AddMeta(102, -1, 7);
+			AddMeta(103, 3, 7);
+			AddMeta(104, 4, 7);
+			AddMeta(105, 5, 7);
+
+			AddMeta(106, 6, 7);
+			AddMeta(107, 7, 7);
+			AddMeta(108, 8, 7);
+			AddMeta(109, 9, 7);
+			AddMeta(110, 10, 7);
 		}
 
+		/// <summary>
+		/// This method takes in an atomic number of a chemical element as a key,
+		/// and places the group and period meta data for that element under said
+		/// key.
+		/// </summary>
 		private void AddMeta(int key, int group, int period)
 		{
 			AtomicNumberToGroupMap.Add(key, group);
