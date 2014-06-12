@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
+using System.Windows;
 
 
 namespace Unv.PeriodicTableSelectorLib.ElementCreation
@@ -39,12 +42,33 @@ namespace Unv.PeriodicTableSelectorLib.ElementCreation
 		{
 			get { return m_elementSymbols; }
 		}
+
+		public override ObservableCollection<ChemicalElement> SelectedElements
+		{
+			get { return m_selectedElements; }
+			protected set
+			{
+				if (m_selectedElements == value)
+					return;
+
+				if (m_selectedElements != null)
+					m_selectedElements.CollectionChanged -= SelectedElements_CollectionChanged;
+
+				m_selectedElements = value;
+
+				if (m_selectedElements != null)
+					m_selectedElements.CollectionChanged += SelectedElements_CollectionChanged;
+			}
+		}
+		private ObservableCollection<ChemicalElement> m_selectedElements;
 		#endregion
 
 
 		#region Constructors
 		public StandardTableFactory()
 		{
+			SelectedElements = new ObservableCollection<ChemicalElement>();
+
 			m_atomicNumberIndex = new Dictionary<int, ChemicalElement>(118);
 			m_nameIndex			= new Dictionary<string, ChemicalElement>(236);
 
@@ -60,6 +84,40 @@ namespace Unv.PeriodicTableSelectorLib.ElementCreation
 				m_nameIndex.Add(element.ChemicalName.ToLower(), element);
 				m_nameIndex.Add(element.Symbol.ToLower(), element);
 			}
+		}
+		#endregion
+
+
+		#region Event Handlers
+		void SelectedElements_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+		{
+			switch (e.Action)
+			{
+			case NotifyCollectionChangedAction.Add:
+				break;
+
+			case NotifyCollectionChangedAction.Remove:
+				break;
+
+			default:
+				throw new NotImplementedException();
+			}
+		}
+
+		void Element_Unchecked(object sender, RoutedEventArgs e)
+		{
+			var source = sender as ChemicalElement;
+			if (source != null)
+				if (SelectedElements.Contains(source))
+					SelectedElements.Add(source);
+		}
+
+		void Element_Checked(object sender, RoutedEventArgs e)
+		{
+			var source = sender as ChemicalElement;
+			if (source != null)
+				if (!SelectedElements.Contains(source))
+					SelectedElements.Add(source);
 		}
 		#endregion
 
@@ -283,6 +341,9 @@ namespace Unv.PeriodicTableSelectorLib.ElementCreation
 					ChemicalName	= name, 
 					AtomicMass		= meanAtomicMass 
 				};
+
+			element.Checked += Element_Checked;
+			element.Unchecked += Element_Unchecked;
 
 			elements.Add(element);
 		}
