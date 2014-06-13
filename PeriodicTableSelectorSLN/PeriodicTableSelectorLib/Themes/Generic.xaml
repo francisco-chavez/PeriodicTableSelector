@@ -23,7 +23,7 @@
 	<ControlTemplate x:Key="ChemicalElementTemplate" TargetType="local:ChemicalElement">
 		<Border BorderBrush="{TemplateBinding Foreground}" 
 				Background="{TemplateBinding Background}" 
-				BorderThickness="2"
+				BorderThickness="{TemplateBinding BorderThickness}"
 				Padding="2">
 			<Grid Margin="0,1,0,0">
 				<TextBlock x:Name="GlowItem00" 
@@ -71,7 +71,7 @@
 				<Border x:Name="GlowItem01" 
 						Grid.Row="0"
 						BorderBrush="{TemplateBinding GlowBrush}"
-						BorderThickness="2"
+						BorderThickness="{TemplateBinding BorderThickness}"
 						Background="{x:Null}"
 						Margin="-2,-3,-2,-2"
 						Effect="{StaticResource GlowEffect}"
@@ -89,20 +89,22 @@
 	</ControlTemplate>
 
 	<Style TargetType="local:ChemicalElement">
-		<Setter Property="Width" Value="80"/>
-		<Setter Property="Height" Value="110"/>
-		<Setter Property="Template" Value="{StaticResource ChemicalElementTemplate}"/>
+		<Setter Property="Width"		Value="80"/>
+		<Setter Property="Height"		Value="110"/>
+		<Setter Property="BorderThickness" Value="2"/>
+		<Setter Property="Background"	Value="Transparent"/>
 		
-		<Setter Property="Background" Value="Transparent"/>
-		<Setter Property="Foreground" Value="Black"/>
-		<Setter Property="GlowBrush"  Value="Gold"/>
+		<Setter Property="Foreground"	Value="Black"/>
+		<Setter Property="GlowBrush"	Value="Gold"/>
+
+		<Setter Property="Template" Value="{StaticResource ChemicalElementTemplate}"/>
 	</Style>
 
 
 	<!-- Periodic Table Selector -->
 	<ControlTemplate x:Key="PeriodicTableTemplate" TargetType="local:PeriodicTable">
-		<Border BorderBrush="Blue" 
-				BorderThickness="2"
+		<Border BorderBrush="{TemplateBinding Foreground}" 
+				BorderThickness="{TemplateBinding BorderThickness}"
 				VerticalAlignment="Stretch"
 				HorizontalAlignment="Stretch"
 				Width="{TemplateBinding Width}"
@@ -119,6 +121,7 @@
 	</ControlTemplate>
 
 	<Style TargetType="local:PeriodicTable">
+		<Setter Property="BorderThickness" Value="2"/>
 		<Setter Property="Template" Value="{StaticResource PeriodicTableTemplate}"/>
 	</Style>
 </ResourceDictionary>

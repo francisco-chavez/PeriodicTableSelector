@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChemicalElement.cs" />
+    <Compile Include="ChemicalGroup.cs" />
     <Compile Include="ElementCreation\FactoryBase.cs" />
     <Compile Include="ElementCreation\StandardTableFactory.cs" />
     <Compile Include="PeriodicTable.cs" />
