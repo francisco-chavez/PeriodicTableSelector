@@ -121,7 +121,7 @@ namespace Unv.PeriodicTableSelectorLib.ElementCreation
 				break;
 
 			default:
-				throw new NotImplementedException();
+				break;
 			}
 		}
 
@@ -341,6 +341,19 @@ namespace Unv.PeriodicTableSelectorLib.ElementCreation
 			CreateNewElement(108, "Hs", "Hassium",			269, elements);
 			CreateNewElement(109, "Mt", "Meitnerium",		278, elements);
 			CreateNewElement(110, "Ds", "Darmstadtium",		281, elements);
+
+			///
+			/// Elements 111 - 118
+			/// 
+			CreateNewElement(111, "Rg",  "Roetgenium",	281, elements);
+			CreateNewElement(112, "Cn",  "Copernicium", 285, elements);
+			CreateNewElement(113, "Uut", "Ununtrium",	186, elements);
+			CreateNewElement(114, "Fl",  "Flerovium",	289, elements);
+			CreateNewElement(115, "Uup", "Ununpentium", 288, elements);
+
+			CreateNewElement(116, "Lv",  "Livermorium", 293, elements);
+			CreateNewElement(117, "Uus", "Ununseptium", 294, elements);
+			CreateNewElement(118, "Uuo", "Ununoctium",	294, elements);
 
 
 			return elements;

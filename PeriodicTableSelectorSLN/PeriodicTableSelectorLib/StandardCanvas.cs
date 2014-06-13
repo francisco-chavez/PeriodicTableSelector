@@ -153,46 +153,20 @@ namespace Unv.PeriodicTableSelectorLib
 
 		private void SetChemicalMetaData()
 		{
-			var agMap = AtomicNumberToGroupMap;
-			var apMap = AtomicNumberToPeriodMap;
-
 			///
-			/// Elements 1 - 5
+			/// Elements 1 - 10
 			/// 
-			agMap.Add(1, 1);
-			apMap.Add(1, 1);
+			AddMeta(1, 1, 1);
+			AddMeta(2, 18, 1);
+			AddMeta(3, 1, 2);
+			AddMeta(4, 2, 2);
+			AddMeta(5, 13, 2);
 
-			agMap.Add(2, 18);
-			apMap.Add(2, 1);
-
-			agMap.Add(3, 1);
-			apMap.Add(3, 2);
-
-			agMap.Add(4, 2);
-			apMap.Add(4, 2);
-
-			agMap.Add(5, 13);
-			apMap.Add(5, 2);
-
-
-			///
-			/// Elements 6 - 10
-			/// 
-			agMap.Add(6, 14);
-			apMap.Add(6, 2);
-
-			agMap.Add(7, 15);
-			apMap.Add(7, 2);
-
-			agMap.Add(8, 16);
-			apMap.Add(8, 2);
-
-			agMap.Add(9, 17);
-			apMap.Add(9, 2);
-
-			agMap.Add(10, 18);
-			apMap.Add(10, 2);
-
+			AddMeta(6, 14, 2);
+			AddMeta(7, 15, 2);
+			AddMeta(8, 16, 2);
+			AddMeta(9, 17, 2);
+			AddMeta(10, 18, 2);
 
 			///
 			/// Elements 11 - 20
@@ -343,6 +317,19 @@ namespace Unv.PeriodicTableSelectorLib
 			AddMeta(108, 8, 7);
 			AddMeta(109, 9, 7);
 			AddMeta(110, 10, 7);
+
+			///
+			/// Elements 110 - 118
+			/// 
+			AddMeta(111, 11, 7);
+			AddMeta(112, 12, 7);
+			AddMeta(113, 13, 7);
+			AddMeta(114, 14, 7);
+			AddMeta(115, 15, 7);
+
+			AddMeta(116, 16, 7);
+			AddMeta(117, 17, 7);
+			AddMeta(118, 18, 7);
 		}
 
 		/// <summary>
