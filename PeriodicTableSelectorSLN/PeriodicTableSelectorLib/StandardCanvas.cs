@@ -103,7 +103,7 @@ namespace Unv.PeriodicTableSelectorLib
 
 		protected override Size ArrangeOverride(Size arrangeSize)
 		{
-			List<ChemicalElement> rareEarths = new List<ChemicalElement>(28);
+			List<ChemicalElement> rareEarths = new List<ChemicalElement>(30);
 			double bottom = 0;
 			Size elementSize = new Size(ChemicalElementWidth, ChemicalElementHeight);
 			double extraTop = Margin.Top;
@@ -116,7 +116,7 @@ namespace Unv.PeriodicTableSelectorLib
 					var chem = (ChemicalElement) child;
 
 					int group = AtomicNumberToGroupMap[chem.AtomicNumber];
-					if (group < 0)
+					if (group < 0 || chem.AtomicNumber == 71 || chem.AtomicNumber == 103)
 					{
 						rareEarths.Add(chem);
 					}
@@ -136,12 +136,16 @@ namespace Unv.PeriodicTableSelectorLib
 
 			bottom += elementSize.Height / 2;
 
+			rareEarths.Sort(new Comparison<ChemicalElement>((chemA, chemB) => { return chemA.AtomicNumber - chemB.AtomicNumber; }));
+
+			int itemsPerRow = rareEarths.Count / 2;
+			var offset = (18 - itemsPerRow) * elementSize.Width / 2;
 			for (int i = 0; i < rareEarths.Count; i++)
 			{
 				Rect r = new Rect(
 					new Point(
-						i * elementSize.Width + extraLeft,
-						bottom + extraTop),
+						(i % itemsPerRow) * elementSize.Width + extraLeft + offset,
+						bottom + extraTop + (i < itemsPerRow ? 0.0 : elementSize.Height)),
 					elementSize);
 
 				rareEarths[i].Arrange(r);
