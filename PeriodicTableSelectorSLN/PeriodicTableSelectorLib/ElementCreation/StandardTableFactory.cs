@@ -94,9 +94,30 @@ namespace Unv.PeriodicTableSelectorLib.ElementCreation
 			switch (e.Action)
 			{
 			case NotifyCollectionChangedAction.Add:
+				if(e.NewItems != null)
+					foreach (var item in e.NewItems)
+					{
+						if (!(item is ChemicalElement))
+							throw new Exception("Non-Chemical-Element added to selected items list.");
+
+						var chem = item as ChemicalElement;
+						if (!m_elements.Contains(chem))
+							throw new Exception("A Chemical Element that doesn't belong to this factory as been added to the selected items list.");
+
+						chem.IsChecked = true;
+					}
 				break;
 
 			case NotifyCollectionChangedAction.Remove:
+				if(e.OldItems != null)
+					foreach (var item in e.OldItems)
+					{
+						var chem = item as ChemicalElement;
+						if (chem == null)
+							continue;
+
+						chem.IsChecked = false;
+					}
 				break;
 
 			default:
@@ -109,7 +130,7 @@ namespace Unv.PeriodicTableSelectorLib.ElementCreation
 			var source = sender as ChemicalElement;
 			if (source != null)
 				if (SelectedElements.Contains(source))
-					SelectedElements.Add(source);
+					SelectedElements.Remove(source);
 		}
 
 		void Element_Checked(object sender, RoutedEventArgs e)
