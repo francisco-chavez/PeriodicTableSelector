@@ -6,11 +6,16 @@
 		UseLayoutRounding="True"
 		SnapsToDevicePixels="True"
 		Height="450" Width="725">
-	<Grid>
-		<PeriodicTableSelectorLib:PeriodicTable/>
-		<Button Width="15" Height="15" 
-				VerticalAlignment="Bottom" 
-				HorizontalAlignment="Right" 
-				Click="Button_Click"/>
-	</Grid>
+	<DockPanel>
+		<ListBox DockPanel.Dock="Right" 
+				 Width="50"
+				 ItemsSource="{Binding ElementName=Selector, Path=SelectedElements, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+			<ListBox.ItemTemplate>
+				<DataTemplate DataType="PeriodicTableSelectorLib:ChemicalElement">
+					<TextBlock Text="{Binding Symbol}"/>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
+		<PeriodicTableSelectorLib:PeriodicTable x:Name="Selector"/>
+	</DockPanel>
 </Window>

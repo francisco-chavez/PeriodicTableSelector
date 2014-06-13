@@ -25,9 +25,13 @@ namespace Unv.PeriodicTableSelectorLib
 		: ItemsControl
 	{
 		#region Attributes
-		public static readonly DependencyProperty ChemicalElementFactoryProperty;
-		public static readonly DependencyProperty ChemicalElementWidthProperty;
-		public static readonly DependencyProperty ChemicalElementHeightProperty;
+		public static readonly DependencyProperty		ChemicalElementFactoryProperty;
+		public static readonly DependencyProperty		ChemicalElementWidthProperty;
+		public static readonly DependencyProperty		ChemicalElementHeightProperty;
+
+		private static readonly DependencyPropertyKey	SelectedElementsPropertyKey;
+		private static readonly DependencyProperty		SelectedElementsProperty;
+
 
 		private StandardCanvas m_drawArea;
 		#endregion
@@ -56,19 +60,20 @@ namespace Unv.PeriodicTableSelectorLib
 			get { return (double) GetValue(ChemicalElementWidthProperty); }
 			set { SetValue(ChemicalElementWidthProperty, value); }
 		}
+
+		public ObservableCollection<ChemicalElement> SelectedElements
+		{
+			get { return (ObservableCollection<ChemicalElement>) GetValue(SelectedElementsProperty); }
+			set { SetValue(SelectedElementsPropertyKey, value); }
+		}
 		#endregion
 
 
 		#region Constructors
-		public PeriodicTable()
-		{
-			ChemicalElementFactory	= new StandardTableFactory();
-		}
-
 		static PeriodicTable()
 		{
 			DefaultStyleKeyProperty.OverrideMetadata(
-				typeof(PeriodicTable), 
+				typeof(PeriodicTable),
 				new FrameworkPropertyMetadata(typeof(PeriodicTable)));
 
 
@@ -77,7 +82,7 @@ namespace Unv.PeriodicTableSelectorLib
 				typeof(FactoryBase),
 				typeof(PeriodicTable),
 				new FrameworkPropertyMetadata(
-					null, 
+					null,
 					FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.AffectsMeasure,
 					ChemicalElementFactory_Changed));
 
@@ -97,6 +102,19 @@ namespace Unv.PeriodicTableSelectorLib
 				new FrameworkPropertyMetadata(
 					110.0,
 					ChemicalHeight_Changed));
+
+			SelectedElementsPropertyKey = DependencyProperty.RegisterReadOnly(
+				"SelectedElements",
+				typeof(ObservableCollection<ChemicalElement>),
+				typeof(PeriodicTable),
+				new FrameworkPropertyMetadata(
+					null));
+			SelectedElementsProperty = SelectedElementsPropertyKey.DependencyProperty;
+		}
+
+		public PeriodicTable()
+		{
+			ChemicalElementFactory	= new StandardTableFactory();
 		}
 		#endregion
 
@@ -118,6 +136,8 @@ namespace Unv.PeriodicTableSelectorLib
 				chem.Height = pTable.ChemicalElementHeight;
 				pTable.Items.Add(chem);
 			}
+
+			pTable.SelectedElements = factory.SelectedElements;
 		}
 
 		private static void ChemicalWidth_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
