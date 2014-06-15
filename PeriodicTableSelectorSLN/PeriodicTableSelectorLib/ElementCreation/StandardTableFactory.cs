@@ -184,6 +184,105 @@ namespace Unv.PeriodicTableSelectorLib.ElementCreation
 			foreach (var chem in this.Elements)
 				group.AddChemicalElement(chem.AtomicNumber);
 			this.ChemicalGroups.Add(group);
+
+			// Alkali Metals
+			group = new ChemicalGroup(this, false);
+			group.GroupName = "Alkali Metals";
+			this.ChemicalGroups.Add(group);
+
+			group.AddChemicalElement("Lithium");
+			group.AddChemicalElement("Sodium");
+			group.AddChemicalElement("Potassium");
+			group.AddChemicalElement("Rubidium");
+			group.AddChemicalElement("Caesium");
+			group.AddChemicalElement("Francium");
+
+			group.LockGroupMembers();
+
+
+			// Alkaline Earth Metals
+			group = new ChemicalGroup(this, false);
+			group.GroupName = "Alkaline Earth Metals";
+			this.ChemicalGroups.Add(group);
+
+			group.AddChemicalElement("Beryllium");
+			group.AddChemicalElement("Magnesium");
+			group.AddChemicalElement("Calcium");
+			group.AddChemicalElement("Strontium");
+			group.AddChemicalElement("Barium");
+			group.AddChemicalElement("Radium");
+
+			group.LockGroupMembers();
+
+
+			// Transition Metals
+			group = new ChemicalGroup(this, false);
+			group.GroupName = "Transition Metals";
+			this.ChemicalGroups.Add(group);
+
+			group.AddChemicalElement("Scandium");
+			group.AddChemicalElement("Titanium");
+			group.AddChemicalElement("Vanadium");
+			group.AddChemicalElement("Chromium");
+			group.AddChemicalElement("Manganese");
+
+			group.AddChemicalElement("Iron");
+			group.AddChemicalElement("Cobalt");
+			group.AddChemicalElement("Nickel");
+			group.AddChemicalElement("Copper");
+			group.AddChemicalElement("Zinc");
+
+			group.AddChemicalElement("Yttrium");
+			group.AddChemicalElement("Zirconium");
+			group.AddChemicalElement("Niobium");
+			group.AddChemicalElement("Molybdenum");
+			group.AddChemicalElement("Technetium");
+
+			group.AddChemicalElement("Ruthenium");
+			group.AddChemicalElement("Rhodium");
+			group.AddChemicalElement("Palladium");
+			group.AddChemicalElement("Silver");
+			group.AddChemicalElement("Cadmium");
+
+			group.AddChemicalElement("Hafnium");
+			group.AddChemicalElement("Tantalum");
+			group.AddChemicalElement("Tungsten");
+			group.AddChemicalElement("Rhenium");
+			group.AddChemicalElement("Osmium");
+
+			group.AddChemicalElement("Iridium");
+			group.AddChemicalElement("Platinum");
+			group.AddChemicalElement("Gold");
+			group.AddChemicalElement("Mercury");
+			group.AddChemicalElement("Rutherfordium");
+
+			group.AddChemicalElement("Dubnium");
+			group.AddChemicalElement("Seaborgium");
+			group.AddChemicalElement("Bohrium");
+			group.AddChemicalElement("Hassium");
+			group.AddChemicalElement("Meitnerium");
+
+			group.AddChemicalElement("Darmstadtium");
+			group.AddChemicalElement("Roetgenium");
+			group.AddChemicalElement("Copernicium");
+
+			group.LockGroupMembers();
+
+
+			// Other Metals
+			group = new ChemicalGroup(this, false);
+			group.GroupName = "Other Metals";
+			this.ChemicalGroups.Add(group);
+
+			group.AddChemicalElement("Aluminium");
+			group.AddChemicalElement("Gallium");
+			group.AddChemicalElement("Indium");
+			group.AddChemicalElement("Tin");
+			group.AddChemicalElement("Thallium");
+			group.AddChemicalElement("Lead");
+			group.AddChemicalElement("Bismuth");
+
+			group.LockGroupMembers();
 		}
 
 		private List<ChemicalElement> CreateElements()
@@ -219,7 +318,7 @@ namespace Unv.PeriodicTableSelectorLib.ElementCreation
 			/// 
 			CreateNewElement(11, "Na", "Sodium",		22.98976928,	elements);
 			CreateNewElement(12, "Mg", "Magnesium",		24.305,			elements);
-			CreateNewElement(13, "Al", "Aluminium",		26.9815386,		elements);
+			CreateNewElement(13, "Al", "Aluminium",		26.9815386,		elements); // The second i is officual, leaving it out is acceptalbe (according to the standards)
 			CreateNewElement(14, "Si", "Silicon",		28.085,			elements);
 			CreateNewElement(15, "P",  "Phosphorus",	30.973762,		elements);
 
