@@ -49,13 +49,43 @@ namespace Unv.PeriodicTableSelectorLib
 		public void RemoveChemicalElement(int atomicNumber) { }
 		public void RemoveChemicalElement(string symbolOrName) { }
 
-		public void SelectChemicals() { }
-		public void DeselectChemicals() { }
-		public void InvertChemicalSelections() { }
 
-		public void SetGlowBrush(Brush glowBrush) { }
-		public void SetBackground(Brush backgroundBrush) { }
-		public void SetForeground(Brush foregroundBrush) { }
+		public void SelectChemicals()
+		{
+			foreach (var chem in m_elements)
+				chem.IsChecked = true;
+		}
+
+		public void DeselectChemicals()
+		{
+			foreach (var chem in m_elements)
+				chem.IsChecked = false;
+		}
+
+		public void InvertChemicalSelections()
+		{
+			foreach (var chem in m_elements)
+				chem.IsChecked = !chem.IsChecked;
+		}
+
+
+		public void SetGlowBrush(Brush glowBrush)
+		{
+			foreach (var chem in m_elements)
+				chem.GlowBrush = glowBrush;
+		}
+
+		public void SetBackground(Brush backgroundBrush)
+		{
+			foreach (var chem in m_elements)
+				chem.Background = backgroundBrush;
+		}
+
+		public void SetForeground(Brush foregroundBrush)
+		{
+			foreach (var chem in m_elements)
+				chem.Foreground = foregroundBrush;
+		}
 
 		public void LockGroupMembers() { }
 		public bool UnlockGroupMembers() { return CanBeUnlocked; }
