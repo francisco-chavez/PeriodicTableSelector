@@ -87,8 +87,28 @@ namespace Unv.PeriodicTableSelectorLib
 				chem.Foreground = foregroundBrush;
 		}
 
-		public void LockGroupMembers() { }
-		public bool UnlockGroupMembers() { return CanBeUnlocked; }
+
+		public void LockGroupMembers()
+		{
+			IsLocked = true;
+		}
+
+		public bool UnlockGroupMembers()
+		{
+			if (!CanBeUnlocked)
+				return false;
+
+			// You can't unlock something that isn't locked
+			// But, maybe I should just unlock it anyways
+			// because there isn't much point in being so
+			// picky. I'm a bit conflicted on this one.
+			// -FCT
+			if (!IsLocked)
+				return false;
+
+			IsLocked = false;
+			return true;
+		}
 
 
 		public IEnumerator<ChemicalElement> GetEnumerator()
