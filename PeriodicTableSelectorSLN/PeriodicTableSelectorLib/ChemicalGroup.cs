@@ -40,9 +40,72 @@ namespace Unv.PeriodicTableSelectorLib
 
 
 		#region Methods
-		public static ChemicalGroup Union(ChemicalGroup a, ChemicalGroup b) { throw new NotImplementedException(); }
-		public static ChemicalGroup Inersection(ChemicalGroup a, ChemicalGroup b) { throw new NotImplementedException(); }
-		public static ChemicalGroup Complement(ChemicalGroup a, ChemicalGroup b) { throw new NotImplementedException(); }
+		/// <summary>
+		/// Returns a Chemical Group containing the set union of 'a' and  'b'.
+		/// </summary>
+		public static ChemicalGroup Union(ChemicalGroup a, ChemicalGroup b)
+		{
+			SetCheck(a, b);
+
+			var atomiNumbers = new HashSet<int>(a.Select(chem => { return chem.AtomicNumber; }));
+			atomiNumbers.UnionWith(b.Select(chem => { return chem.AtomicNumber; }));
+
+			ChemicalGroup result = new ChemicalGroup(a.Factory);
+
+			foreach (var atomicNumber in atomiNumbers.ToArray())
+				result.AddChemicalElement(atomicNumber);
+
+			return result;
+		}
+
+		/// <summary>
+		/// Returns a Chemical Group containing the set intersection of 'a' and 'b'.
+		/// </summary>
+		public static ChemicalGroup Inersection(ChemicalGroup a, ChemicalGroup b)
+		{
+			SetCheck(a, b);
+
+			var atomicNumbers = new HashSet<int>(a.Select(chem => { return chem.AtomicNumber; }));
+			atomicNumbers.IntersectWith(b.Select(chem => { return chem.AtomicNumber; }));
+
+			ChemicalGroup result = new ChemicalGroup(a.Factory);
+			foreach (var atomicNumber in atomicNumbers.ToArray())
+				result.AddChemicalElement(atomicNumber);
+
+			return result;
+		}
+		
+		/// <summary>
+		/// Returns a Chemical Group contains the relative complement 
+		/// of 'b' in 'a'. In other words 'a' minus 'b'.
+		/// </summary>
+		public static ChemicalGroup Complement(ChemicalGroup a, ChemicalGroup b)
+		{
+			SetCheck(a, b);
+
+			HashSet<int> atomicNumbers = new HashSet<int>(a.Select(chem => { return chem.AtomicNumber; }));
+			atomicNumbers.ExceptWith(b.Select(chem => { return chem.AtomicNumber; }));
+
+			ChemicalGroup result = new ChemicalGroup(a.Factory);
+
+			foreach (var atomicNumber in atomicNumbers.ToArray())
+				result.AddChemicalElement(atomicNumber);
+
+			return result;
+		}
+
+		/// <summary>
+		/// Checks to see if both Chemical Groups that are passed in are valid for a
+		/// set operation. If they are not, then an exception will be thrown.
+		/// </summary>
+		private static void SetCheck(ChemicalGroup a, ChemicalGroup b)
+		{
+			if (a == null || b == null)
+				throw new ArgumentNullException("Both groups must be filled in.");
+			if (a.Factory != b.Factory)
+				throw new ArgumentException("Chemical Groups A and B come from different factories.");
+		}
+
 
 		public void AddChemicalElement(int atomicNumber)
 		{
