@@ -17,6 +17,7 @@ namespace Unv.PeriodicTableSelectorLib.ElementCreation
 		private Dictionary<string, ChemicalElement> m_nameIndex;
 
 		private				ChemicalElement[]		m_elements;
+		private				List<ChemicalGroup>		m_chemicalGroups;
 		private readonly	string[]				m_elementNames;
 		private readonly	string[]				m_elementSymbols;
 		#endregion
@@ -41,6 +42,11 @@ namespace Unv.PeriodicTableSelectorLib.ElementCreation
 		public override string[] ElementSymbols
 		{
 			get { return m_elementSymbols; }
+		}
+
+		public override List<ChemicalGroup> ChemicalGroups
+		{
+			get { return m_chemicalGroups; }
 		}
 
 		public override ObservableCollection<ChemicalElement> SelectedElements
@@ -84,6 +90,9 @@ namespace Unv.PeriodicTableSelectorLib.ElementCreation
 				m_nameIndex.Add(element.ChemicalName.ToLower(), element);
 				m_nameIndex.Add(element.Symbol.ToLower(), element);
 			}
+
+			m_chemicalGroups = new List<ChemicalGroup>();
+			BuildStandardGroups();
 		}
 		#endregion
 
@@ -162,6 +171,19 @@ namespace Unv.PeriodicTableSelectorLib.ElementCreation
 		public override ChemicalElement Element(string nameOrSymbol)
 		{
 			return m_nameIndex[nameOrSymbol.ToLower()];
+		}
+
+
+		protected virtual void BuildStandardGroups()
+		{
+			ChemicalGroup group = null;
+
+			// All Elements
+			group = new ChemicalGroup(this, false);
+			group.GroupName = "All Chemical Elements";
+			foreach (var chem in this.Elements)
+				group.AddChemicalElement(chem.AtomicNumber);
+			this.ChemicalGroups.Add(group);
 		}
 
 		private List<ChemicalElement> CreateElements()

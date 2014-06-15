@@ -13,7 +13,7 @@ namespace Unv.PeriodicTableSelectorLib.ElementCreation
 		public abstract ChemicalElement[]						Elements			{ get; }
 		public abstract string[]								ElementNames		{ get; }
 		public abstract string[]								ElementSymbols		{ get; }
-
+		public abstract List<ChemicalGroup>						ChemicalGroups		{ get; }
 		public abstract ObservableCollection<ChemicalElement>	SelectedElements	{ get; protected set; }
 		#endregion
 
