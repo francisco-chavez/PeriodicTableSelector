@@ -44,10 +44,50 @@ namespace Unv.PeriodicTableSelectorLib
 		public static ChemicalGroup Inersection(ChemicalGroup a, ChemicalGroup b) { throw new NotImplementedException(); }
 		public static ChemicalGroup Complement(ChemicalGroup a, ChemicalGroup b) { throw new NotImplementedException(); }
 
-		public void AddChemicalElement(int atomicNumber) { }
-		public void AddChemicalElement(string symbolOrName) { }
-		public void RemoveChemicalElement(int atomicNumber) { }
-		public void RemoveChemicalElement(string symbolOrName) { }
+		public void AddChemicalElement(int atomicNumber)
+		{
+			// If we already have it, then don't add it
+			if (m_elements.Any(chem => { return chem.AtomicNumber == atomicNumber; }))
+				return;
+
+			m_elements.Add(Factory.Element(atomicNumber));
+		}
+
+		public void AddChemicalElement(string symbolOrName)
+		{
+			if(string.IsNullOrWhiteSpace(symbolOrName))
+				throw new ArgumentNullException();
+
+			// If we already have it, then don't put it in
+			if (m_elements.Any(chem => { return symbolOrName.Equals(chem.Symbol, StringComparison.OrdinalIgnoreCase) || symbolOrName.Equals(chem.ChemicalName, StringComparison.OrdinalIgnoreCase); }))
+				return;
+
+			m_elements.Add(Factory.Element(symbolOrName));
+		}
+
+		public void RemoveChemicalElement(int atomicNumber)
+		{
+			var chemicals = (from ChemicalElement chem in m_elements
+							 where chem.AtomicNumber == atomicNumber
+							 select chem).ToArray();
+
+			foreach (var chem in chemicals)
+				m_elements.Remove(chem);
+		}
+
+		public void RemoveChemicalElement(string symbolOrName)
+		{
+			if(string.IsNullOrWhiteSpace(symbolOrName))
+				throw new ArgumentNullException();
+
+			var chemicals = (from ChemicalElement chem in m_elements
+							 where symbolOrName.Equals(chem.ChemicalName, StringComparison.OrdinalIgnoreCase) ||
+								   symbolOrName.Equals(chem.Symbol, StringComparison.OrdinalIgnoreCase)
+							 select chem).ToArray();
+
+			foreach (var chem in chemicals)
+				m_elements.Remove(chem);
+		}
 
 
 		public void SelectChemicals()
@@ -96,14 +136,6 @@ namespace Unv.PeriodicTableSelectorLib
 		public bool UnlockGroupMembers()
 		{
 			if (!CanBeUnlocked)
-				return false;
-
-			// You can't unlock something that isn't locked
-			// But, maybe I should just unlock it anyways
-			// because there isn't much point in being so
-			// picky. I'm a bit conflicted on this one.
-			// -FCT
-			if (!IsLocked)
 				return false;
 
 			IsLocked = false;
