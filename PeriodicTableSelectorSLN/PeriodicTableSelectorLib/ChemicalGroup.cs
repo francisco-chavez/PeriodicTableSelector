@@ -11,19 +11,36 @@ using Unv.PeriodicTableSelectorLib.ElementCreation;
 namespace Unv.PeriodicTableSelectorLib
 {
 	public class ChemicalGroup
-		: IEnumerable<ChemicalElement>
+		: IEnumerable<ChemicalElement>, IDisposable
 	{
 		#region Attributes
-		private List<ChemicalElement> m_elements;
+		private List<ChemicalElement>	m_elements;
+		private bool					isDisposed = false;
 		#endregion
 
 
 		#region Properties
+		/// <summary>
+		/// Gets the Factory owning the chemicals in this group.
+		/// </summary>
 		public FactoryBase	Factory			{ get; private set; }
+
 		public string		GroupName		{ get; set; }
+
+		/// <summary>
+		/// Gets a bool inidcating if the groups membership can
+		/// be unlocked once it has been locked.
+		/// </summary>
 		public bool			CanBeUnlocked	{ get; private set; }
+
+		/// <summary>
+		/// Gets a bool indicating if the membership to this group
+		/// is currently locked. Chemical Elements cannot be added
+		/// to or removed from the group while locked.
+		/// </summary>
 		public bool			IsLocked		{ get; private set; }
 		#endregion
+
 
 		#region Constructors
 		public ChemicalGroup(FactoryBase chemicalFactory, bool canBeUnlocked = true)
@@ -35,6 +52,11 @@ namespace Unv.PeriodicTableSelectorLib
 			CanBeUnlocked	= canBeUnlocked;
 			m_elements		= new List<ChemicalElement>();
 			Factory			= chemicalFactory;
+		}
+
+		~ChemicalGroup()
+		{
+			this.Dispose();
 		}
 		#endregion
 
@@ -104,11 +126,18 @@ namespace Unv.PeriodicTableSelectorLib
 				throw new ArgumentNullException("Both groups must be filled in.");
 			if (a.Factory != b.Factory)
 				throw new ArgumentException("Chemical Groups A and B come from different factories.");
+			if (a.isDisposed || b.isDisposed)
+				throw new ArgumentException("Cannot perform set operations on disposed Chemical Groups.");
 		}
 
 
 		public void AddChemicalElement(int atomicNumber)
 		{
+			DisposeCheck();
+
+			if (IsLocked)
+				return;
+
 			// If we already have it, then don't add it
 			if (m_elements.Any(chem => { return chem.AtomicNumber == atomicNumber; }))
 				return;
@@ -118,6 +147,11 @@ namespace Unv.PeriodicTableSelectorLib
 
 		public void AddChemicalElement(string symbolOrName)
 		{
+			DisposeCheck();
+
+			if (IsLocked)
+				return;
+
 			if(string.IsNullOrWhiteSpace(symbolOrName))
 				throw new ArgumentNullException();
 
@@ -130,6 +164,11 @@ namespace Unv.PeriodicTableSelectorLib
 
 		public void RemoveChemicalElement(int atomicNumber)
 		{
+			DisposeCheck();
+
+			if (IsLocked)
+				return;
+
 			var chemicals = (from ChemicalElement chem in m_elements
 							 where chem.AtomicNumber == atomicNumber
 							 select chem).ToArray();
@@ -140,6 +179,11 @@ namespace Unv.PeriodicTableSelectorLib
 
 		public void RemoveChemicalElement(string symbolOrName)
 		{
+			DisposeCheck();
+
+			if (IsLocked)
+				return;
+
 			if(string.IsNullOrWhiteSpace(symbolOrName))
 				throw new ArgumentNullException();
 
@@ -155,18 +199,24 @@ namespace Unv.PeriodicTableSelectorLib
 
 		public void SelectChemicals()
 		{
+			DisposeCheck();
+
 			foreach (var chem in m_elements)
 				chem.IsChecked = true;
 		}
 
 		public void DeselectChemicals()
 		{
+			DisposeCheck();
+
 			foreach (var chem in m_elements)
 				chem.IsChecked = false;
 		}
 
 		public void InvertChemicalSelections()
 		{
+			DisposeCheck();
+
 			foreach (var chem in m_elements)
 				chem.IsChecked = !chem.IsChecked;
 		}
@@ -174,18 +224,24 @@ namespace Unv.PeriodicTableSelectorLib
 
 		public void SetGlowBrush(Brush glowBrush)
 		{
+			DisposeCheck();
+
 			foreach (var chem in m_elements)
 				chem.GlowBrush = glowBrush;
 		}
 
 		public void SetBackground(Brush backgroundBrush)
 		{
+			DisposeCheck();
+
 			foreach (var chem in m_elements)
 				chem.Background = backgroundBrush;
 		}
 
 		public void SetForeground(Brush foregroundBrush)
 		{
+			DisposeCheck();
+
 			foreach (var chem in m_elements)
 				chem.Foreground = foregroundBrush;
 		}
@@ -193,11 +249,15 @@ namespace Unv.PeriodicTableSelectorLib
 
 		public void LockGroupMembers()
 		{
+			DisposeCheck();
+
 			IsLocked = true;
 		}
 
 		public bool UnlockGroupMembers()
 		{
+			DisposeCheck();
+
 			if (!CanBeUnlocked)
 				return false;
 
@@ -208,12 +268,33 @@ namespace Unv.PeriodicTableSelectorLib
 
 		public IEnumerator<ChemicalElement> GetEnumerator()
 		{
+			DisposeCheck();
+
 			return m_elements.GetEnumerator();
 		}
 
 		IEnumerator IEnumerable.GetEnumerator()
 		{
+			DisposeCheck();
+
 			return ((IEnumerable) m_elements).GetEnumerator();
+		}
+
+
+		public void Dispose()
+		{
+			if (isDisposed)
+				return;
+
+			isDisposed = true;
+			m_elements.Clear();
+			m_elements = null;
+		}
+
+		private void DisposeCheck()
+		{
+			if (isDisposed)
+				throw new InvalidOperationException("This Chemical Group is currently Dispoased");
 		}
 		#endregion
 	}
