@@ -83,8 +83,11 @@ namespace Unv.PeriodicTableSelectorLib
 			if (m_adornerLayer == null)
 			{
 				m_adornerLayer = AdornerLayer.GetAdornerLayer(this);
-				m_adornerLayer.Add(m_headings);
 			}
+
+			var adorners = m_adornerLayer.GetAdorners(this);
+			if (adorners == null || !adorners.Contains(m_headings))
+				m_adornerLayer.Add(m_headings);
 		}
 		#endregion
 
