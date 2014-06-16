@@ -55,6 +55,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Examples\Halloween.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Examples\SimpleSelection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -66,6 +70,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Examples\Halloween.xaml.cs">
+      <DependentUpon>Halloween.xaml</DependentUpon>
     </Compile>
     <Compile Include="Examples\SimpleSelection.xaml.cs">
       <DependentUpon>SimpleSelection.xaml</DependentUpon>
