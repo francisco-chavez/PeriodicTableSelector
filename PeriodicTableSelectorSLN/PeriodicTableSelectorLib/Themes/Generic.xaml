@@ -101,23 +101,23 @@
 
 	<!-- Periodic Table Selector -->
 	<ControlTemplate x:Key="PeriodicTableTemplate" TargetType="local:PeriodicTable">
-		<Border BorderBrush="{TemplateBinding Foreground}" 
-				BorderThickness="{TemplateBinding BorderThickness}"
-				VerticalAlignment="Stretch"
-				HorizontalAlignment="Stretch"
-				Width="{TemplateBinding Width}"
-				Height="{TemplateBinding Height}"
-				Background="{TemplateBinding Background}">
-			<Viewbox HorizontalAlignment="Stretch"
-					 VerticalAlignment="Stretch"
-					 Stretch="Uniform"
-					 StretchDirection="Both">
+		<Viewbox HorizontalAlignment="Stretch"
+				 VerticalAlignment="Stretch"
+				 Stretch="Uniform"
+				 StretchDirection="Both">
+			<Border BorderBrush="{TemplateBinding Foreground}" 
+					BorderThickness="{TemplateBinding BorderThickness}"
+					VerticalAlignment="Stretch"
+					HorizontalAlignment="Stretch"
+					Width="{TemplateBinding Width}"
+					Height="{TemplateBinding Height}"
+					Background="{TemplateBinding Background}">
 				<local:StandardCanvas x:Name="PART_CanvasArea"
 									  IsItemsHost="True" 
 									  Margin="1"
 									  Background="{x:Null}"/>
-			</Viewbox>
-		</Border>
+			</Border>
+		</Viewbox>
 	</ControlTemplate>
 
 	<Style TargetType="local:PeriodicTable">
