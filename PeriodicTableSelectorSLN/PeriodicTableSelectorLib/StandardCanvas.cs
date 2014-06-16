@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 
 using Unv.PeriodicTableSelectorLib.ElementCreation;
 
@@ -14,6 +16,8 @@ namespace Unv.PeriodicTableSelectorLib
 		: Canvas
 	{
 		#region Attributes
+		private AdornerLayer	m_adornerLayer;
+		private StandardAdorner m_headings;
 		#endregion
 
 
@@ -31,7 +35,8 @@ namespace Unv.PeriodicTableSelectorLib
 					{
 						((ChemicalElement) child).Width = value;
 					}
-				m_chemicalWidth = value; 
+				m_chemicalWidth = value;
+				m_headings.ElementWidth = value;
 			}
 		}
 		private double m_chemicalWidth = 60;
@@ -48,6 +53,7 @@ namespace Unv.PeriodicTableSelectorLib
 					}
 
 				m_chemicalHeight = value;
+				m_headings.ElementHeight = value;
 			}
 		}
 		private double m_chemicalHeight = 60;
@@ -57,12 +63,28 @@ namespace Unv.PeriodicTableSelectorLib
 		#region Constructors
 		public StandardCanvas()
 		{
+			m_headings = new StandardAdorner(this);
+
 			AtomicNumberToGroupMap = new Dictionary<int, int>(118);
 			AtomicNumberToPeriodMap = new Dictionary<int, int>(118);
 
 			ChemicalElementHeight = 60;
 
 			SetChemicalMetaData();
+
+			this.Loaded += StandardCanvas_Loaded;
+		}
+		#endregion
+
+
+		#region Event Handlers
+		void StandardCanvas_Loaded(object sender, RoutedEventArgs e)
+		{
+			if (m_adornerLayer == null)
+			{
+				m_adornerLayer = AdornerLayer.GetAdornerLayer(this);
+				m_adornerLayer.Add(m_headings);
+			}
 		}
 		#endregion
 
@@ -97,6 +119,7 @@ namespace Unv.PeriodicTableSelectorLib
 			var margin = this.Margin;
 			size.Width += margin.Left + margin.Right;
 			size.Height += margin.Top + margin.Bottom;
+
 
 			return size;
 		}
@@ -152,6 +175,8 @@ namespace Unv.PeriodicTableSelectorLib
 			}
 
 			rareEarths.Clear();
+
+
 			return arrangeSize;
 		}
 
