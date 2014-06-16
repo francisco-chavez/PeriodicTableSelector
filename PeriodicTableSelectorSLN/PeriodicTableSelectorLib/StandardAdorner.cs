@@ -101,7 +101,7 @@ namespace Unv.PeriodicTableSelectorLib
 			m_drawArea.Children.Add(m_insertText1);
 			m_drawArea.Children.Add(m_insertText2);
 
-
+			this.AddLogicalChild(m_drawArea);
 			this.AddVisualChild(m_drawArea);
 			SetHorizontalLocations();
 			SetVerticalLocations();
