@@ -162,6 +162,22 @@ namespace Unv.PeriodicTableSelectorLib
 			m_elements.Add(Factory.Element(symbolOrName));
 		}
 
+		public void AddChemicalElements(ChemicalGroup group)
+		{
+			if (this.IsLocked)
+				return;
+
+			if (group == null)
+				throw new ArgumentNullException();
+
+			HashSet<int> currentKeys = new HashSet<int>(m_elements.Select(chem => { return chem.AtomicNumber; }));
+			HashSet<int> newKeys = new HashSet<int>(group.m_elements.Select(chem => { return chem.AtomicNumber; }));
+
+			newKeys.ExceptWith(currentKeys.ToArray());
+			foreach (var key in newKeys)
+				AddChemicalElement(key);
+		}
+
 		public void RemoveChemicalElement(int atomicNumber)
 		{
 			DisposeCheck();

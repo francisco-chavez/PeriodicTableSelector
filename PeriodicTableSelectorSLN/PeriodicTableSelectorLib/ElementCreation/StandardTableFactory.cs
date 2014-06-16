@@ -283,6 +283,136 @@ namespace Unv.PeriodicTableSelectorLib.ElementCreation
 			group.AddChemicalElement("Bismuth");
 
 			group.LockGroupMembers();
+
+
+			// Metalloids
+			group = new ChemicalGroup(this, false);
+			group.GroupName = "Metalloids";
+			this.ChemicalGroups.Add(group);
+
+			group.AddChemicalElement("Boron");
+			group.AddChemicalElement("Silicon");
+			group.AddChemicalElement("Germanium");
+			group.AddChemicalElement("Arsenic");
+			group.AddChemicalElement("Antimony");
+			group.AddChemicalElement("Tellurium");
+			group.AddChemicalElement("Polonium");
+
+			group.LockGroupMembers();
+
+
+			// Non-Metals
+			group = new ChemicalGroup(this, false);
+			group.GroupName = "Non-Metals";
+			this.ChemicalGroups.Add(group);
+
+			group.AddChemicalElement("Hydrogen");
+			group.AddChemicalElement("Carbon");
+			group.AddChemicalElement("Nitrogen");
+			group.AddChemicalElement("Oxygen");
+			group.AddChemicalElement("Phosphorus");
+			group.AddChemicalElement("Sulfur");
+			group.AddChemicalElement("Selenium");
+
+			group.LockGroupMembers();
+
+
+			// Halogens
+			group = new ChemicalGroup(this, false);
+			group.GroupName = "Halogens";
+			this.ChemicalGroups.Add(group);
+
+			group.AddChemicalElement("Fluorine");
+			group.AddChemicalElement("Chlorine");
+			group.AddChemicalElement("Bromine");
+			group.AddChemicalElement("Iodine");
+			group.AddChemicalElement("Astatine");
+
+			group.LockGroupMembers();
+
+			
+			// Noble Gases
+			group = new ChemicalGroup(this, false);
+			group.GroupName = "Noble Gases";
+			this.ChemicalGroups.Add(group);
+
+			group.AddChemicalElement("Helium");
+			group.AddChemicalElement("Neon");
+			group.AddChemicalElement("Argon");
+			group.AddChemicalElement("Krypton");
+			group.AddChemicalElement("Xenon");
+			group.AddChemicalElement("Radon");
+
+			group.LockGroupMembers();
+
+
+			///
+			/// Rare Earth Elements
+			/// 
+			
+			// Lanthanum Series
+			var lanthanide = new ChemicalGroup(this, false);
+			group = lanthanide;
+			group.GroupName = "Lanthanide Series";
+			this.ChemicalGroups.Add(group);
+
+			group.AddChemicalElement("Lanthanum");
+			group.AddChemicalElement("Cerium");
+			group.AddChemicalElement("Praseodymium");
+			group.AddChemicalElement("Neodymium");
+			group.AddChemicalElement("Promethium");
+
+			group.AddChemicalElement("Samarium");
+			group.AddChemicalElement("Europium");
+			group.AddChemicalElement("Gadolinium");
+			group.AddChemicalElement("Terbium");
+			group.AddChemicalElement("Dysprosium");
+
+			group.AddChemicalElement("Holmium");
+			group.AddChemicalElement("Erbium");
+			group.AddChemicalElement("Thulium");
+			group.AddChemicalElement("Ytterbium");
+			group.AddChemicalElement("Lutetium");
+
+			group.LockGroupMembers();
+
+
+			// Actinide Series
+			var actinium = new ChemicalGroup(this, false);
+			group = actinium;
+			group.GroupName = "Actinide Series";
+			this.ChemicalGroups.Add(group);
+
+			group.AddChemicalElement("Actinium");
+			group.AddChemicalElement("Thorium");
+			group.AddChemicalElement("Protactinium");
+			group.AddChemicalElement("Uranium");
+			group.AddChemicalElement("Neptunium");
+
+			group.AddChemicalElement("Plutonium");
+			group.AddChemicalElement("Americium");
+			group.AddChemicalElement("Curium");
+			group.AddChemicalElement("Berkelium");
+			group.AddChemicalElement("Californium");
+
+			group.AddChemicalElement("Einsteinium");
+			group.AddChemicalElement("Fermium");
+			group.AddChemicalElement("Mendelevium");
+			group.AddChemicalElement("Nobelium");
+			group.AddChemicalElement("Lawrencium");
+
+			group.LockGroupMembers();
+
+
+			// Rare Earth Elements
+			group = new ChemicalGroup(this, false);
+			group.GroupName = "Rare Earth Elements";
+			this.ChemicalGroups.Add(group);
+
+			group.AddChemicalElements(lanthanide);
+			group.AddChemicalElements(actinium);
+
+			group.LockGroupMembers();
 		}
 
 		private List<ChemicalElement> CreateElements()
@@ -347,7 +477,7 @@ namespace Unv.PeriodicTableSelectorLib.ElementCreation
 			/// Elements 31 - 40
 			/// 
 			CreateNewElement(31, "Ga", "Gallium",	69.723,		elements);
-			CreateNewElement(32, "Ge", "Germinium", 72.630,		elements);
+			CreateNewElement(32, "Ge", "Germanium", 72.630,		elements);
 			CreateNewElement(33, "As", "Arsenic",	74.92160,	elements);
 			CreateNewElement(34, "Se", "Selenium",	78.96,		elements);
 			CreateNewElement(35, "Br", "Bromine",	79.904,		elements);
