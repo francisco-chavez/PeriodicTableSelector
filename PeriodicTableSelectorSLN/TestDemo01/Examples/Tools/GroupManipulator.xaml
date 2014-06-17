@@ -5,6 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="150" d:DesignWidth="250">
+	<UserControl.Resources>
+		<Style TargetType="Button">
+			<Setter Property="VerticalContentAlignment" Value="Stretch"/>
+			<Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+		</Style>
+	</UserControl.Resources>
 	<Border Padding="6"
 			BorderThickness="4"
 			CornerRadius="8"
@@ -27,11 +33,30 @@
 					   HorizontalAlignment="Center"/>
 			
 			<Button Grid.Column="0" Grid.Row="1"
-					Click="ChangeBackground_Click"/>
+					Click="ChangeBackground_Click">
+				<Rectangle Fill="Green"
+						   Stroke="Gray"
+						   StrokeThickness="2"
+						   Margin="4"/>
+			</Button>
 			<Button Grid.Column="1" Grid.Row="1"
-					Click="ChangeForeground_Click"/>
+					Click="ChangeForeground_Click">
+				<Rectangle Stroke="Green"
+						   StrokeThickness="3"
+						   Height="7"
+						   Margin="6"
+						   StrokeDashArray="4,2,3,7"/>
+			</Button>
 			<Button Grid.Column="2" Grid.Row="1"
-					Click="ChangeGlowBrush_Click"/>
+					Click="ChangeGlowBrush_Click">
+				<Ellipse Stroke="Green"
+						 StrokeThickness="3"
+						 Margin="6">
+					<Ellipse.Effect>
+						<BlurEffect Radius="6"/>
+					</Ellipse.Effect>
+				</Ellipse>
+			</Button>
 		</Grid>
 	</Border>
 </UserControl>
