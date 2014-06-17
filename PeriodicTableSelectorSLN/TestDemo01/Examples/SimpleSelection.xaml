@@ -12,10 +12,11 @@
 									   Path=SelectedElements, 
 									   Mode=OneWay, 
 									   UpdateSourceTrigger=PropertyChanged}"
-				 Width="50">
+				 Width="75">
 			<ListBox.ItemTemplate>
 				<DataTemplate DataType="PeriodicTableSelectorLib:ChemicalElement">
-					<TextBlock Text="{Binding Symbol}"/>
+					<TextBlock Text="{Binding Symbol}"
+							   FontSize="20"/>
 				</DataTemplate>
 			</ListBox.ItemTemplate>
 		</ListBox>

@@ -16,5 +16,8 @@
 		<TabItem Header="Colored Backgrounds">
 			<Examples:ColoredGroups/>
 		</TabItem>
+		<TabItem Header="Selectable Colors">
+			<Examples:SelectableColors/>
+		</TabItem>
 	</TabControl>
 </Window>
