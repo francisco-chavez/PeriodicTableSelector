@@ -13,5 +13,8 @@
 		<TabItem Header="Halloween">
 			<Examples:Halloween/>
 		</TabItem>
+		<TabItem Header="Colored Backgrounds">
+			<Examples:ColoredGroups/>
+		</TabItem>
 	</TabControl>
 </Window>
