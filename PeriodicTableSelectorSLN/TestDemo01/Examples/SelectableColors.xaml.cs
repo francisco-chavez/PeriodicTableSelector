@@ -49,6 +49,19 @@ namespace TestDemo01.Examples
 		{
 			InitializeComponent();
 			this.DataContext = this;
+
+			GroupList = new ObservableCollection<GroupManipulator>();
+
+			this.Loaded += SelectableColors_Loaded;
+		}
+		#endregion
+
+
+		#region Event Handlers
+		void SelectableColors_Loaded(object sender, RoutedEventArgs e)
+		{
+			foreach (var group in Selector.ChemicalElementFactory.ChemicalGroups)
+				GroupList.Add(new GroupManipulator() { Group = group });
 		}
 		#endregion
 	}

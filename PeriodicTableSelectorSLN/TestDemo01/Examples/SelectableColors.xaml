@@ -9,13 +9,33 @@
              d:DesignHeight="300" d:DesignWidth="700">
     <Grid>
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="260"/>
+			<ColumnDefinition Width="225"/>
 			<ColumnDefinition/>
 		</Grid.ColumnDefinitions>
 		
 		<pTable:PeriodicTable x:Name="Selector"
-							  Grid.Column="1"/>
+							  Grid.Column="1"
+							  Margin="4,2,2,2"/>
 
-		<ListBox ItemsSource="{Binding GroupList}"/>
+		<ListBox ItemsSource="{Binding GroupList}"
+				 Margin="2">
+			<ListBox.ItemContainerStyle>
+				<Style TargetType="ListBoxItem">
+					<Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+					<Setter Property="VerticalContentAlignment" Value="Stretch"/>
+					<Setter Property="Height" Value="100"/>
+					<Setter Property="TextBlock.FontSize" Value="14"/>
+					<Setter Property="Margin" Value="4,2"/>
+					
+					<Setter Property="Template">
+						<Setter.Value>
+							<ControlTemplate TargetType="ListBoxItem">
+								<ContentPresenter/>
+							</ControlTemplate>
+						</Setter.Value>
+					</Setter>
+				</Style>
+			</ListBox.ItemContainerStyle>
+		</ListBox>
     </Grid>
 </UserControl>

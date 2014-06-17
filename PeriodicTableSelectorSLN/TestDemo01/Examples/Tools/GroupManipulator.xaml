@@ -22,7 +22,9 @@
 			
 			<TextBlock Grid.Column="0" Grid.Row="0"
 					   Grid.ColumnSpan="3"
-					   Text="{Binding GroupName}"/>
+					   Text="{Binding GroupName}"
+					   VerticalAlignment="Center"
+					   HorizontalAlignment="Center"/>
 			
 			<Button Grid.Column="0" Grid.Row="1"
 					Click="ChangeBackground_Click"/>
