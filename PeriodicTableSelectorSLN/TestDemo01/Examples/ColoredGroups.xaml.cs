@@ -35,6 +35,11 @@ namespace TestDemo01.Examples
 		{
 			ChemicalGroup group = null;
 			
+			///
+			/// The background colors were selected by looking 
+			/// at http://www.chemicalelements.com/show/mass.html
+			/// I chose two random colors fro the Rare Earths
+			/// -FCT
 			group = Selector.ChemicalElementFactory.ChemicalGroups.First(g => { return g.GroupName == "Alkali Metals"; });
 			group.SetBackground(Brushes.MediumAquamarine);
 
