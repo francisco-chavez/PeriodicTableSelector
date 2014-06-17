@@ -16,6 +16,9 @@ using System.Windows.Shapes;
 
 using Unv.PeriodicTableSelectorLib;
 
+using Forms			= System.Windows.Forms;
+using ColorDialog	= System.Windows.Forms.ColorDialog;
+
 
 namespace TestDemo01.Examples.Tools
 {
@@ -78,22 +81,72 @@ namespace TestDemo01.Examples.Tools
 		#region Event Handlers
 		private void ChangeBackground_Click(object sender, RoutedEventArgs e)
 		{
+			bool changeColor;
 
+			var brush = SelectNewBrush(out changeColor);
+			if (changeColor)
+				Group.SetBackground(brush);
 		}
 
 		private void ChangeForeground_Click(object sender, RoutedEventArgs e)
 		{
+			bool changeColor;
 
+			var brush = SelectNewBrush(out changeColor);
+			if (changeColor)
+				Group.SetForeground(brush);
 		}
 
 		private void ChangeGlowBrush_Click(object sender, RoutedEventArgs e)
 		{
+			bool changeColor;
 
+			var brush = SelectNewBrush(out changeColor);
+			if (changeColor)
+				Group.SetGlowBrush(brush);
 		}
 		#endregion
 
 
 		#region Methods
+		private Brush SelectNewBrush(out bool useIt)
+		{
+			var dlg = new ColorDialog();
+			dlg.AllowFullOpen = true;
+			dlg.AnyColor = false;
+			dlg.FullOpen = true;
+			dlg.SolidColorOnly = true;
+
+			var dialogResult = dlg.ShowDialog();
+
+			switch (dialogResult)
+			{
+			case Forms.DialogResult.Abort:
+			case Forms.DialogResult.Cancel:
+			case Forms.DialogResult.Ignore:
+			case Forms.DialogResult.No:
+			case Forms.DialogResult.None:
+			case Forms.DialogResult.Retry:
+				useIt = false;
+				break;
+
+			default:
+				useIt = true;
+				break;
+			}
+
+			var userColor = dlg.Color;
+			var correctedColorType = new Color();
+			correctedColorType.A = userColor.A;
+			correctedColorType.B = userColor.B;
+			correctedColorType.G = userColor.G;
+			correctedColorType.R = userColor.R;
+
+			SolidColorBrush brush = new SolidColorBrush(correctedColorType);
+
+			return brush;
+		}
+
 		private void OnPropertyChanged(string propertyName)
 		{
 			if (PropertyChanged != null)
