@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,17 +14,42 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using TestDemo01.Examples.Tools;
+
 
 namespace TestDemo01.Examples
 {
 	/// <summary>
 	/// Interaction logic for SelectableColors.xaml
 	/// </summary>
-	public partial class SelectableColors : UserControl
+	public partial class SelectableColors 
+		: UserControl
 	{
+		#region Attributes
+		public static readonly DependencyProperty GroupListProperty =
+			DependencyProperty.Register(
+				"GroupList", 
+				typeof(ObservableCollection<GroupManipulator>), 
+				typeof(SelectableColors), 
+				new PropertyMetadata(null));
+		#endregion
+
+
+		#region Properties
+		public ObservableCollection<GroupManipulator> GroupList
+		{
+			get { return (ObservableCollection<GroupManipulator>) GetValue(GroupListProperty); }
+			set { SetValue(GroupListProperty, value); }
+		}
+		#endregion
+
+
+		#region Constructors
 		public SelectableColors()
 		{
 			InitializeComponent();
+			this.DataContext = this;
 		}
+		#endregion
 	}
 }

@@ -3,9 +3,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+			 xmlns:pTable="clr-namespace:Unv.PeriodicTableSelectorLib;assembly=Unv.PeriodicTableSelectorLib"
+			 xmlns:tools="clr-namespace:TestDemo01.Examples.Tools"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="700">
     <Grid>
-            
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="260"/>
+			<ColumnDefinition/>
+		</Grid.ColumnDefinitions>
+		
+		<pTable:PeriodicTable x:Name="Selector"
+							  Grid.Column="1"/>
+
+		<ListBox ItemsSource="{Binding GroupList}"/>
     </Grid>
 </UserControl>
