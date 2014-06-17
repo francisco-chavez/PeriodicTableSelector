@@ -281,6 +281,10 @@ namespace Unv.PeriodicTableSelectorLib.ElementCreation
 			group.AddChemicalElement("Thallium");
 			group.AddChemicalElement("Lead");
 			group.AddChemicalElement("Bismuth");
+			group.AddChemicalElement("Ununtrium");
+			group.AddChemicalElement("Flerovium");
+			group.AddChemicalElement("Ununpentium");
+			group.AddChemicalElement("Livermorium");
 
 			group.LockGroupMembers();
 
@@ -297,6 +301,7 @@ namespace Unv.PeriodicTableSelectorLib.ElementCreation
 			group.AddChemicalElement("Antimony");
 			group.AddChemicalElement("Tellurium");
 			group.AddChemicalElement("Polonium");
+			group.AddChemicalElement("Ununseptium");
 
 			group.LockGroupMembers();
 
@@ -342,6 +347,7 @@ namespace Unv.PeriodicTableSelectorLib.ElementCreation
 			group.AddChemicalElement("Krypton");
 			group.AddChemicalElement("Xenon");
 			group.AddChemicalElement("Radon");
+			group.AddChemicalElement("Ununoctium");
 
 			group.LockGroupMembers();
 
