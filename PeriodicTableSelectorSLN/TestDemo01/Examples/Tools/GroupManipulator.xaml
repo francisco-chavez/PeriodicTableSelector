@@ -34,14 +34,14 @@
 			
 			<Button Grid.Column="0" Grid.Row="1"
 					Click="ChangeBackground_Click">
-				<Rectangle Fill="Green"
+				<Rectangle Fill="{Binding Path=BackgroundBrush, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
 						   Stroke="Gray"
 						   StrokeThickness="2"
 						   Margin="4"/>
 			</Button>
 			<Button Grid.Column="1" Grid.Row="1"
 					Click="ChangeForeground_Click">
-				<Rectangle Stroke="Green"
+				<Rectangle Stroke="{Binding ForegroundBrush}"
 						   StrokeThickness="3"
 						   Height="7"
 						   Margin="6"
@@ -49,7 +49,7 @@
 			</Button>
 			<Button Grid.Column="2" Grid.Row="1"
 					Click="ChangeGlowBrush_Click">
-				<Ellipse Stroke="Green"
+				<Ellipse Stroke="{Binding GlowBrush}"
 						 StrokeThickness="3"
 						 Margin="6">
 					<Ellipse.Effect>

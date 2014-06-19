@@ -66,6 +66,61 @@ namespace TestDemo01.Examples.Tools
 			}
 		}
 		private ChemicalGroup mn_group;
+
+		// Yes, I know that using Dependency Properties would take up
+		// less memory, but all I'm doing is showing off some of the
+		// things I can do with the ChemicalGroup class.
+		// -FCT
+		public Brush BackgroundBrush
+		{
+			get { return mn_backgroundBrush; }
+			set
+			{
+				if (mn_backgroundBrush != value)
+				{
+					mn_backgroundBrush = value;
+					OnPropertyChanged("BackgroundBrush");
+
+					if (Group != null)
+						Group.SetBackground(value);
+				}
+			}
+		}
+		private Brush mn_backgroundBrush;
+
+		public Brush ForegroundBrush
+		{
+			get { return mn_foregroundBrush; }
+			set
+			{
+				if (mn_foregroundBrush != value)
+				{
+					mn_foregroundBrush = value;
+					OnPropertyChanged("ForegroundBrush");
+
+					if (Group != null)
+						Group.SetForeground(value);
+				}
+			}
+		}
+		private Brush mn_foregroundBrush;
+
+		public Brush GlowBrush
+		{
+			get { return mn_glowBrush; }
+			set
+			{
+				if (mn_glowBrush != value)
+				{
+					mn_glowBrush = value;
+					OnPropertyChanged("GlowBrush");
+
+					if (Group != null)
+						Group.SetGlowBrush(value);
+				}
+			}
+		}
+		private Brush mn_glowBrush;
 		#endregion
 
 
@@ -74,6 +129,10 @@ namespace TestDemo01.Examples.Tools
 		{
 			InitializeComponent();
 			DataContext = this;
+
+			this.BackgroundBrush = Brushes.Green;
+			this.ForegroundBrush = Brushes.Green;
+			this.GlowBrush = Brushes.Green;
 		}
 		#endregion
 
@@ -85,7 +144,7 @@ namespace TestDemo01.Examples.Tools
 
 			var brush = SelectNewBrush(out changeColor);
 			if (changeColor)
-				Group.SetBackground(brush);
+				BackgroundBrush = brush;
 		}
 
 		private void ChangeForeground_Click(object sender, RoutedEventArgs e)
@@ -94,7 +153,7 @@ namespace TestDemo01.Examples.Tools
 
 			var brush = SelectNewBrush(out changeColor);
 			if (changeColor)
-				Group.SetForeground(brush);
+				ForegroundBrush = brush;
 		}
 
 		private void ChangeGlowBrush_Click(object sender, RoutedEventArgs e)
@@ -103,7 +162,7 @@ namespace TestDemo01.Examples.Tools
 
 			var brush = SelectNewBrush(out changeColor);
 			if (changeColor)
-				Group.SetGlowBrush(brush);
+				GlowBrush = brush;
 		}
 		#endregion
 
