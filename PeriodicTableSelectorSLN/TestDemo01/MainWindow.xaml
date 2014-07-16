@@ -14,7 +14,10 @@
 			<Examples:Halloween/>
 		</TabItem>
 		<TabItem Header="Frosted Glass">
-			<Examples:Halloween/>
+			<Examples:Halloween GlowBrush="Black"
+								TextBrush="White"
+								BackgroundBrush="White"
+								Background="White"/>
 		</TabItem>
 		<TabItem Header="Colored Backgrounds">
 			<Examples:ColoredGroups/>

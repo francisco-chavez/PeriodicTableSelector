@@ -8,6 +8,6 @@
 			 Background="Black">
     <Grid>
 		<PeriodicTableSelectorLib:PeriodicTable x:Name="Selector" 
-												Background="Black"/>
+												Background="Transparent"/>
     </Grid>
 </UserControl>
