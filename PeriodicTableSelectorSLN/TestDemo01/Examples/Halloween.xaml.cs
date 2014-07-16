@@ -53,25 +53,64 @@ namespace TestDemo01.Examples
 		#region Constructors
 		static Halloween()
 		{
+			GlowBrushProperty = DependencyProperty.Register(
+				"GlowBrush",
+				typeof(Brush),
+				typeof(Halloween),
+				new PropertyMetadata(
+					Brushes.Orange,
+					GlowBrushProperty_Changed));
 
+			TextBrushProperty = DependencyProperty.Register(
+				"TextBrush",
+				typeof(Brush),
+				typeof(Halloween),
+				new PropertyMetadata(
+					Brushes.Black,
+					TextBrushProperty_Changed));
+
+			BackgroundBrushProperty = DependencyProperty.Register(
+				"BackgroundBrush",
+				typeof(Brush),
+				typeof(Halloween),
+				new PropertyMetadata(
+					Brushes.Black,
+					BackgroundBrushProperty_Changed));
 		}
 
 		public Halloween()
 		{
 			InitializeComponent();
 
-			var group = this.Selector.ChemicalElementFactory.ChemicalGroups.First(g => { return g.GroupName == "All Chemical Elements"; });
-			group.SetBackground(Brushes.Black);
-			group.SetForeground(Brushes.Black);
-			group.SetGlowBrush(Brushes.Orange);
-
+			var group = this.GetAllChemicalsGroup();
 			group.SelectChemicals();
 		}
 		#endregion
 
 
 		#region Dependency Property Event Handlers
+		static void GlowBrushProperty_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
+		{
+			var me = (Halloween) d;
 
+			var chems = me.GetAllChemicalsGroup();
+			chems.SetGlowBrush((Brush) e.NewValue);
+		}
+		static void TextBrushProperty_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
+		{
+			var me = (Halloween) d;
+
+			var chems = me.GetAllChemicalsGroup();
+			chems.SetForeground((Brush) e.NewValue);
+
+		}
+		static void BackgroundBrushProperty_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
+		{
+			var me = (Halloween) d;
+
+			var chems = me.GetAllChemicalsGroup();
+			chems.SetBackground((Brush) e.NewValue);
+		}
 		#endregion
 
 
